@@ -9,6 +9,8 @@ class World;
 class TopDownWorldRenderer : WorldRendererBase
 {
 public:
+    ~TopDownWorldRenderer() override = default;
+    
     vec2 GetPosition() const;
     vec2 GetFrustumSize() const;
     float GetRotation() const;
