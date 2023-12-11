@@ -541,6 +541,7 @@
     <ClCompile Include="src\Rendering\Textures\Texture.cpp" />
     <ClCompile Include="src\Scene\World\Entities\Entity.cpp" />
     <ClCompile Include="src\Scene\World\World.cpp" />
+    <ClCompile Include="src\Scene\World\WorldExemples\BasicRoom\BasicRoom_WorldExemple.cpp" />
     <ClCompile Include="src\Scene\World\WorldGeometry\Edge.cpp" />
     <ClCompile Include="src\UI\Viewport\2DViewport\WViewPort2D.cpp" />
     <ClCompile Include="src\UI\Viewport\WViewPortBase.cpp" />
@@ -567,6 +568,7 @@
     <ClInclude Include="src\Rendering\Textures\Texture.h" />
     <ClInclude Include="src\Scene\World\Entities\Entity.h" />
     <ClInclude Include="src\Scene\World\World.h" />
+    <ClInclude Include="src\Scene\World\WorldExemples\BasicRoom\BasicRoom_WorldExemple.h" />
     <ClInclude Include="src\Scene\World\WorldGeometry\Edge.h" />
     <ClInclude Include="src\UI\UIWidget.h" />
     <ClInclude Include="src\UI\Viewport\2DViewport\WViewPort2D.h" />
