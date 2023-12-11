@@ -1,11 +1,11 @@
 ﻿#pragma once
 
-#include "Scene/Viewport/ViewPortBase.h"
+#include "UI/Viewport/WViewPortBase.h"
 
-class ViewPort2D : public ViewPortBase
+class WViewPort2D : public WViewPortBase
 {
 public:
-    ViewPort2D(const char* name = "ViewPort2D") : ViewPortBase(name){}
+    WViewPort2D(const char* name = "ViewPort2D") : WViewPortBase(name){}
 
     //Zoom
     void SetZoom(float inZoom);

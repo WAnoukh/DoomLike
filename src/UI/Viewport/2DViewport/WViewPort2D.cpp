@@ -1,23 +1,24 @@
-﻿#include "ViewPort2D.h"
+﻿#include "WViewPort2D.h"
 
 #include <string>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
+#include "imgui.h"
 #include "Helpers/UsefullFunc.h"
 
 
-void ViewPort2D::SetZoom(float inZoom)
+void WViewPort2D::SetZoom(float inZoom)
 {
     targetZoom = inZoom;
 }
 
-float ViewPort2D::GetDisplayedZoom() const 
+float WViewPort2D::GetDisplayedZoom() const 
 {
     return displayedZoom;
 }
 
-void ViewPort2D::StartPanning(const float x, const float y)
+void WViewPort2D::StartPanning(const float x, const float y)
 {
     lastMousePos = {x,y};
     //startPan = ImVec2(x,y);
@@ -25,7 +26,7 @@ void ViewPort2D::StartPanning(const float x, const float y)
     isPanning = true;
 }
 
-void ViewPort2D::ApplyPanning(const float x, const float y)
+void WViewPort2D::ApplyPanning(const float x, const float y)
 {
     ImVec2 screenZoom;
     GetScreenZoom(screenZoom.x, screenZoom.y);
@@ -35,7 +36,7 @@ void ViewPort2D::ApplyPanning(const float x, const float y)
                         }; 
 }
 
-void ViewPort2D::StopPanning(bool savePan)
+void WViewPort2D::StopPanning(bool savePan)
 {
     isPanning = false;
     //if (savePan)
@@ -46,17 +47,17 @@ void ViewPort2D::StopPanning(bool savePan)
     //targetPanOffset = ImVec2(0.0f,0.0f);
 }
 
-bool ViewPort2D::IsPanning() const
+bool WViewPort2D::IsPanning() const
 {
     return isPanning;
 }
 
-ImVec2 ViewPort2D::GetDisplayedOffset() const
+ImVec2 WViewPort2D::GetDisplayedOffset() const
 {
     return {displayedOffset.x, displayedOffset.y};
 }
 
-void ViewPort2D::Tick(float deltaTime)
+void WViewPort2D::Tick(float deltaTime)
 {
     displayedZoom = AnoukhFun::Damp(displayedZoom, targetZoom, lerpSpeed, deltaTime);
     const glm::vec2 vPanOffset = glm::vec2(displayedOffset.x, displayedOffset.y);
@@ -65,9 +66,9 @@ void ViewPort2D::Tick(float deltaTime)
     displayedOffset = {newOffset.x, newOffset.y};
 }
 
-void ViewPort2D::RenderUI()
+void WViewPort2D::RenderUI()
 {
-    ViewPortBase::RenderUI();
+    WViewPortBase::RenderUI();
     const std::string name = ("offsets %s" + std::string(GetGuiName()));
     ImGui::Begin(name.c_str());
     ImVec2 screenToTextPos;
@@ -96,7 +97,7 @@ void ViewPort2D::RenderUI()
     ImGui::End();
 }
 
-void ViewPort2D::ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xoffset, double yoffset)
+void WViewPort2D::ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xoffset, double yoffset)
 {
     if (IsWindowHovered())
     {
@@ -106,7 +107,7 @@ void ViewPort2D::ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture, 
     }
 }
 
-void ViewPort2D::MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int button, int action, int mods)
+void WViewPort2D::MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int button, int action, int mods)
 {
     if(button == GLFW_MOUSE_BUTTON_RIGHT)
     {
@@ -131,7 +132,7 @@ void ViewPort2D::MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCapt
     }
 }
 
-void ViewPort2D::MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xPos, double yPos)
+void WViewPort2D::MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xPos, double yPos)
 {
     if(IsPanning())
     {
@@ -145,6 +146,6 @@ void ViewPort2D::MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToCa
     }
 }
 
-void ViewPort2D::RecompileShaders()
+void WViewPort2D::RecompileShaders()
 {
 }
