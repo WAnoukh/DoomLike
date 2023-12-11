@@ -3,7 +3,7 @@
 #include <iostream>
 #include <glad/glad.h>
 
-void Texture::CreateBlankTexture(int inWidth, int inHeight, GLenum inFormat)
+void Texture::CreateBlankTexture(unsigned inWidth, unsigned inHeight, GLenum inFormat)
 {
     if(inFormat != GL_RGB && inFormat != GL_RGBA)
     {

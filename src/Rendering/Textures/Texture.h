@@ -5,7 +5,7 @@
 class Texture
 {
 public:
-    void CreateBlankTexture(int inWidth, int inHeight, GLenum inFormat);
+    void CreateBlankTexture(unsigned inWidth, unsigned inHeight, GLenum inFormat);
 
     bool EditPixel(int inX, int inY, unsigned char color[3], unsigned char alpha = 255);
 
