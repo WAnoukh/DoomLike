@@ -8,6 +8,7 @@ class WorldRendererBase : Renderer
 public:
     void SetWorldToRender(World* inViewedWorld);
     World* GetWorldToRender() const;
+    
 private:
     World* worldToRender = nullptr;
 };
