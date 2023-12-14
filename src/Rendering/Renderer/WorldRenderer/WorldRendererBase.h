@@ -3,11 +3,12 @@
 
 class World;
 
-class WorldRendererBase : Renderer
+class WorldRendererBase : public Renderer
 {
 public:
+    ~WorldRendererBase() override = default;
     void SetWorldToRender(World* inViewedWorld);
-    World* GetWorldToRender() const;
+    [[nodiscard]] World* GetWorldToRender() const;
     
 private:
     World* worldToRender = nullptr;

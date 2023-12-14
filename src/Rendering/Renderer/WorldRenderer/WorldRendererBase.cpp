@@ -1,4 +1,5 @@
 ﻿#include "WorldRendererBase.h"
+
 void WorldRendererBase::SetWorldToRender(World* inViewedWorld)
 {
     worldToRender = inViewedWorld;

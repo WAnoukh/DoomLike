@@ -6,7 +6,7 @@ using namespace glm;
 
 class World;
 
-class TopDownWorldRenderer : WorldRendererBase
+class TopDownWorldRenderer : public WorldRendererBase
 {
 public:
     ~TopDownWorldRenderer() override = default;

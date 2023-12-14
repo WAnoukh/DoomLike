@@ -8,7 +8,7 @@
 
 class Renderer;
 
-class WViewPortBase : UIWidget
+class WViewPortBase : public UIWidget
 {
 public:
     WViewPortBase(const char* name = "ViewportBase") : guiName(name)
