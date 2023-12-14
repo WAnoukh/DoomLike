@@ -17,20 +17,20 @@ public:
 
     ~WViewPortBase() override;
 
+    //Getters
+    const char* GetGuiName();
+    ImVec2 GetViewPortPos();
+    ImVec2 GetViewPortSize();
+
+    //Setters
+    void SetViewPortTexture(unsigned int inViewPortTexture);
+    
     void Init() override;
     void RenderUI() override;
     void PreRenderViewPort();
     virtual void RenderViewPort();
-    
-    virtual bool ScreenToTexture(const float x, const float y, float& outX, float& outY) = 0;
 
     bool IsWindowHovered();
-    
-    const char* GetGuiName();
-
-    ImVec2 GetViewPortPos();
-
-    ImVec2 GetViewPortSize();
 private:
     const char* guiName;
     ImVec2 lastSize = ImVec2(0,0);

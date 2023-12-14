@@ -1,14 +1,19 @@
 ﻿#pragma once
 #include "Rendering/Textures/Texture.h"
 
-class Renderer
+class Renderer 
 {
 public:
-    void SetRenderSize(unsigned int width, unsigned int height);
+    virtual ~Renderer() = default;
+    
     virtual void Render() = 0;
-    Texture& GetRenderedTexture();
+    
+    void SetRenderSize(unsigned int width, unsigned int height);
+    [[nodiscard]] const Texture& GetRenderedTexture() const;
+protected:
+    [[nodiscard]] Texture& GetRenderedTexture();
 private:
     unsigned int renderHeight = 100;
     unsigned int renderWidth = 100;
-    Texture renderedTexture;
+    Texture renderedTexture = Texture();
 };

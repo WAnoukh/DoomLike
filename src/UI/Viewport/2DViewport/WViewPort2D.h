@@ -21,22 +21,15 @@ public:
     void Tick(float deltaTime) override;
     void RenderUI() override;
 
-    void ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xoffset, double yoffset) override;
+    void ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xOffset, double yOffset) override;
 
     void MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int button, int action, int mods) override;
 
     void MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xPos, double yPos) override;
 
-protected:
-    virtual void GetScreenZoom(float& x, float& y) = 0;
-
-    virtual void GetScreenOffset(float& x, float& y) = 0;
-
-    virtual void RecompileShaders();
-    
 private:
-    const float defaultLerpSpeed = 0.0001f;
-    float lerpSpeed = defaultLerpSpeed;
+    inline static const float DEFAULT_VIEWPORT_2D_LERPSPEED = 0.0001f;
+    float lerpSpeed = DEFAULT_VIEWPORT_2D_LERPSPEED;
     
     // Panning
     bool isPanning = false;

@@ -21,15 +21,15 @@ void WViewPortBase::RenderUI()
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
     ImGui::Begin(guiName);
     isWindowHovered = ImGui::IsWindowHovered();
-    ImVec2 windowSize = ImGui::GetContentRegionAvail();
-    if(windowSize.x != lastSize.x || windowSize.y != lastSize.y)
+    const ImVec2 windowSize = ImGui::GetContentRegionAvail();
+    if(windowSize.x != lastSize.x || windowSize.y != lastSize.y)  // NOLINT(clang-diagnostic-float-equal)
     {
         lastSize = windowSize;
     }
-    ImVec2 cursorPos = ImGui::GetCursorPos();
-    ImVec2 windowPos = ImGui::GetWindowPos();
+    const ImVec2 cursorPos = ImGui::GetCursorPos();
+    const ImVec2 windowPos = ImGui::GetWindowPos();
     viewPortPos = ImVec2(cursorPos.x + windowPos.x, cursorPos.y + windowPos.y);
-    ImGui::Image((ImTextureID)viewPortTexture, windowSize , ImVec2(0, 1), ImVec2(1, 0));
+    ImGui::Image(ImTextureID(viewPortTexture), windowSize , ImVec2(0, 1), ImVec2(1, 0)); 
     ImGui::End();
     ImGui::PopStyleVar();
 }
@@ -51,7 +51,7 @@ void WViewPortBase::PreRenderViewPort()
 
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, viewPortTexture, 0);
 
-    glClearColor(0.20784313725490197f, 0.1843137254901961f, 0.26666666666666666, 1.00f);
+    glClearColor(0.20784313725490197f, 0.1843137254901961f, 0.26666666666666666f, 1.00f);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
@@ -79,4 +79,10 @@ ImVec2 WViewPortBase::GetViewPortSize()
 {
     return lastSize;
 }
+
+void WViewPortBase::SetViewPortTexture(unsigned inViewPortTexture)
+{
+    viewPortTexture = inViewPortTexture;
+}
+
 
