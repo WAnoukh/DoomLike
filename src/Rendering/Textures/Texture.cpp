@@ -3,6 +3,8 @@
 #include <iostream>
 #include <glad/glad.h>
 
+#include "Rendering/Color/DLColor.h"
+
 void Texture::CreateBlankTexture(unsigned inWidth, unsigned inHeight, GLenum inFormat)
 {
     if(inFormat != GL_RGB && inFormat != GL_RGBA)
@@ -26,19 +28,21 @@ void Texture::CreateBlankTexture(unsigned inWidth, unsigned inHeight, GLenum inF
     unsigned char color[3]  = {255,0,0};
 }
 
-bool Texture::EditPixel(int inX, int inY, unsigned char color[3], unsigned char alpha)
+bool Texture::EditPixel(int inX, int inY, DLColor color)
 {
+    unsigned char colorArray[4];
+    color.ToUnsignedChar(colorArray);
     if (inX < 0 || inX >= width || inY < 0 || inY >= height)
     {                                                                 
         return false;
     }
     unsigned int pixelSize = format == GL_RGB ? 3 : 4;
-    data[(inX + inY * width) * (pixelSize)] = color[0];
-    data[(inX + inY * width) * (pixelSize) + 1] = color[1];
-    data[(inX + inY * width) * (pixelSize) + 2] = color[2];
+    data[(inX + inY * width) * (pixelSize) + 0] = colorArray[0];
+    data[(inX + inY * width) * (pixelSize) + 1] = colorArray[1];
+    data[(inX + inY * width) * (pixelSize) + 2] = colorArray[2];
     if (format == GL_RGBA)
     {
-        data[(inX + inY * width) * (pixelSize) + 3] = alpha;
+        data[(inX + inY * width) * (pixelSize) + 3] = colorArray[3];
     }
     return true;
 }
@@ -66,4 +70,21 @@ void Texture::SendDataToOpenGl()
 unsigned Texture::GetTextureId() const
 {
     return textureID; 
+}
+
+void Texture::Fill(DLColor color)
+{
+    unsigned char colorArray[4];
+    color.ToUnsignedChar(colorArray);
+    const int pixelLength = format == GL_RGB ? 3 : 4;
+    for (int i = 0; i < width * height; i++)
+    {
+        data[i * pixelLength + 0] = colorArray[0];
+        data[i * pixelLength + 1] = colorArray[1];
+        data[i * pixelLength + 2] = colorArray[2];
+        if (format == GL_RGBA)
+        {
+            data[i * pixelLength + 3] = colorArray[3];
+        }
+    }
 }

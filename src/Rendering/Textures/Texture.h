@@ -2,12 +2,14 @@
 
 #include <glad/glad.h>
 
+struct DLColor;
+
 class Texture
 {
 public:
     void CreateBlankTexture(unsigned inWidth, unsigned inHeight, GLenum inFormat);
 
-    bool EditPixel(int inX, int inY, unsigned char color[3], unsigned char alpha = 255);
+    bool EditPixel(int inX, int inY, DLColor color);
 
     void GenerateOpenGlTexture();
     void SendDataToOpenGl();
@@ -15,6 +17,8 @@ public:
 
     int GetWidth() const { return width; }
     int GetHeight() const { return height; }
+
+    void Fill(DLColor color);
     
 private:
     unsigned char* data = nullptr;

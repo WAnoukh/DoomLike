@@ -534,6 +534,7 @@
     <ClCompile Include="src\Application\Window.cpp" />
     <ClCompile Include="src\Helpers\UsefullFunc.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Rendering\Color\DLColor.cpp" />
     <ClCompile Include="src\Rendering\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Rendering\Renderer\WorldRenderer\TopDownWorldRenderer.cpp" />
     <ClCompile Include="src\Rendering\Renderer\WorldRenderer\WorldRendererBase.cpp" />
@@ -543,6 +544,7 @@
     <ClCompile Include="src\Scene\World\World.cpp" />
     <ClCompile Include="src\Scene\World\WorldExemples\BasicRoom\BasicRoom_WorldExemple.cpp" />
     <ClCompile Include="src\Scene\World\WorldGeometry\Edge.cpp" />
+    <ClCompile Include="src\UI\Viewport\2DViewport\WTopDownWorldViewPort\WTopDownWorldViewPort.cpp" />
     <ClCompile Include="src\UI\Viewport\2DViewport\WViewPort2D.cpp" />
     <ClCompile Include="src\UI\Viewport\WViewPortBase.cpp" />
     <ClCompile Include="third_parties\glad\glad.c" />
@@ -560,6 +562,7 @@
     <ClInclude Include="src\Application\Application.h" />
     <ClInclude Include="src\Application\Window.h" />
     <ClInclude Include="src\Helpers\UsefullFunc.h" />
+    <ClInclude Include="src\Rendering\Color\DLColor.h" />
     <ClInclude Include="src\Rendering\Renderer\Renderer.h" />
     <ClInclude Include="src\Rendering\Renderer\WorldRenderer\TopDownWorldRenderer.h" />
     <ClInclude Include="src\Rendering\Renderer\WorldRenderer\WorldRendererBase.h" />
@@ -571,6 +574,7 @@
     <ClInclude Include="src\Scene\World\WorldExemples\BasicRoom\BasicRoom_WorldExemple.h" />
     <ClInclude Include="src\Scene\World\WorldGeometry\Edge.h" />
     <ClInclude Include="src\UI\UIWidget.h" />
+    <ClInclude Include="src\UI\Viewport\2DViewport\WTopDownWorldViewPort\WTopDownWorldViewPort.h" />
     <ClInclude Include="src\UI\Viewport\2DViewport\WViewPort2D.h" />
     <ClInclude Include="src\UI\Viewport\WViewPortBase.h" />
     <ClInclude Include="third_parties\glad\glad.h" />
