@@ -540,6 +540,7 @@
     <ClCompile Include="src\Rendering\Renderer\WorldRenderer\WorldRendererBase.cpp" />
     <ClCompile Include="src\Rendering\TextureLoader.cpp" />
     <ClCompile Include="src\Rendering\Textures\Texture.cpp" />
+    <ClCompile Include="src\Rendering\Textures\TextureDrawer.cpp" />
     <ClCompile Include="src\Scene\World\Entities\Entity.cpp" />
     <ClCompile Include="src\Scene\World\World.cpp" />
     <ClCompile Include="src\Scene\World\WorldExemples\BasicRoom\BasicRoom_WorldExemple.cpp" />
@@ -569,6 +570,7 @@
     <ClInclude Include="src\Rendering\shader_s.h" />
     <ClInclude Include="src\Rendering\TextureLoader.h" />
     <ClInclude Include="src\Rendering\Textures\Texture.h" />
+    <ClInclude Include="src\Rendering\Textures\TextureDrawer.h" />
     <ClInclude Include="src\Scene\World\Entities\Entity.h" />
     <ClInclude Include="src\Scene\World\World.h" />
     <ClInclude Include="src\Scene\World\WorldExemples\BasicRoom\BasicRoom_WorldExemple.h" />

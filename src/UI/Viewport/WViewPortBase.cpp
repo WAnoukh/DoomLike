@@ -5,13 +5,11 @@
 WViewPortBase::~WViewPortBase()
 {
     glDeleteFramebuffers(1, &FBO);
-    glDeleteTextures(1,&viewPortTexture);
 }
 
 void WViewPortBase::Init()
 {
     glGenFramebuffers(1, &FBO);
-    glGenTextures(1, &viewPortTexture);
 }
 
 void WViewPortBase::RenderUI()
@@ -58,6 +56,7 @@ void WViewPortBase::PreRenderViewPort()
 void WViewPortBase::RenderViewPort()
 {
     PreRenderViewPort();
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 bool WViewPortBase::IsWindowHovered()

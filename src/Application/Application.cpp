@@ -13,13 +13,24 @@
 #include <imgui_internal.h>
 #include <iostream>
 
+#include "Rendering/Renderer/WorldRenderer/TopDownWorldRenderer.h"
+#include "Scene/World/WorldExemples/BasicRoom/BasicRoom_WorldExemple.h"
+#include "UI/Viewport/2DViewport/WTopDownWorldViewPort/WTopDownWorldViewPort.h"
+
 
 void Application::Init() {
 	if (Window.init() == -1) {
 		std::cerr << "Application : Window.init() Failed." << std::endl;
 	}
 	glEnable(GL_DEPTH_TEST);
-	
+
+	basicRoom_WorldExemple = new BasicRoom_WorldExemple();
+	topDownWorldRenderer = new TopDownWorldRenderer();
+	topDownWorldRenderer->SetWorldToRender(basicRoom_WorldExemple);
+	topDownWorldRenderer->Init();
+	topDownWorldViewPort = new WTopDownWorldViewPort();
+	topDownWorldViewPort->SetTopDownWorldRenderer(topDownWorldRenderer);
+	UIWidgets.push_back(topDownWorldViewPort);
 }
 
 void Application::Render()
@@ -31,14 +42,13 @@ void Application::Render()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
-	ImGuiViewport* guiViewPort = ImGui::GetMainViewport();
-	static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
-	ImGuiID dockspace_id = ImGui::DockSpaceOverViewport(guiViewPort,dockspace_flags);
+	/*ImGuiViewport* guiViewPort = ImGui::GetMainViewport();  // NOLINT(clang-diagnostic-comment)
+	static ImGuiDockNodeFlags dockspaceFlags = ImGuiDockNodeFlags_PassthruCentralNode;
+	ImGuiID dockspaceId = ImGui::DockSpaceOverViewport(guiViewPort,dockspaceFlags);
 	if(LayoutNeedRefresh)
 	{
-		if (dockspace_id)
+		if (dockspaceId)
 		{
-			/*
 			if(guiViewPort->Size.x != 0 && guiViewPort->Size.y != 0)
 			{
 				ImGui::DockBuilderAddNode(dockspace_id, dockspace_flags | ImGuiDockNodeFlags_DockSpace);
@@ -50,10 +60,10 @@ void Application::Render()
 				ImGui::DockBuilderDockWindow(textureEditor.GetGuiName(), dock_id_top2);
 				ImGui::DockBuilderDockWindow(planeViewer.GetGuiName(), dockspace_id);
 				ImGui::DockBuilderDockWindow(visualizer.GetGuiName(), dockspace_id);
-			}*/
+			}
 		}
 		LayoutNeedRefresh = false;
-	}	
+	}	*/
 
 	for( auto& Widget : UIWidgets)
 	{

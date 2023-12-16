@@ -1,17 +1,25 @@
 ﻿#include "Renderer.h"
 
+#include "Rendering/Color/DLColor.h"
+
+
+void Renderer::Init()
+{
+    renderedTexture.GenerateOpenGlTexture();
+}
+
 void Renderer::SetRenderSize(const unsigned width, const unsigned height)
 {
     renderWidth = width;
     renderHeight = height;
 }
 
-const Texture& Renderer::GetRenderedTexture() const
+Texture& Renderer::GetRenderedTexture()
 {
     return renderedTexture;
 }
 
-Texture& Renderer::GetRenderedTexture()
+void Renderer::DrawLine(int x1, int y1, int x2, int y2, DLColor color)
 {
-    return renderedTexture;
+
 }

@@ -2,8 +2,15 @@
 
 #include <iostream>
 #include <glad/glad.h>
+#include <glm/detail/type_vec2.hpp>
 
 #include "Rendering/Color/DLColor.h"
+
+
+Texture::Texture()
+{
+    CreateBlankTexture(width,height,format);
+}
 
 void Texture::CreateBlankTexture(unsigned inWidth, unsigned inHeight, GLenum inFormat)
 {
@@ -28,13 +35,17 @@ void Texture::CreateBlankTexture(unsigned inWidth, unsigned inHeight, GLenum inF
     unsigned char color[3]  = {255,0,0};
 }
 
-bool Texture::EditPixel(int inX, int inY, DLColor color)
+void Texture::EditPixel(int inX, int inY, DLColor color, bool debug) const
 {
     unsigned char colorArray[4];
     color.ToUnsignedChar(colorArray);
     if (inX < 0 || inX >= width || inY < 0 || inY >= height)
-    {                                                                 
-        return false;
+    {
+        if(debug)
+        {
+            std::cout << "Texture::EditPixel : Pixel out of bounds "<< inX << "," << inY << std::endl;
+        }
+        return;
     }
     unsigned int pixelSize = format == GL_RGB ? 3 : 4;
     data[(inX + inY * width) * (pixelSize) + 0] = colorArray[0];
@@ -44,7 +55,7 @@ bool Texture::EditPixel(int inX, int inY, DLColor color)
     {
         data[(inX + inY * width) * (pixelSize) + 3] = colorArray[3];
     }
-    return true;
+    return;
 }
 
 void Texture::GenerateOpenGlTexture()
@@ -52,7 +63,7 @@ void Texture::GenerateOpenGlTexture()
     glGenTextures(1, &textureID);
 }
 
-void Texture::SendDataToOpenGl()
+void Texture::SendDataToOpenGl() const
 {
     glBindTexture(GL_TEXTURE_2D, textureID);
     //To change if we want to load from texture file
@@ -63,16 +74,22 @@ void Texture::SendDataToOpenGl()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
-unsigned Texture::GetTextureId() const
+unsigned int Texture::GetTextureId() const
 {
     return textureID; 
 }
 
-void Texture::Fill(DLColor color)
+glm::vec2 Texture::GetSize() const
+{
+    return glm::vec2(width, height);
+}
+
+void Texture::Fill(DLColor color) const
 {
     unsigned char colorArray[4];
     color.ToUnsignedChar(colorArray);

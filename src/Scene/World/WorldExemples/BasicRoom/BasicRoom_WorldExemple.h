@@ -2,7 +2,7 @@
 #include "Scene/World/World.h"
 #include "Scene/World/WorldGeometry/Edge.h"
 
-class BasicRoom_WorldExemple : World
+class BasicRoom_WorldExemple : public World
 {
 public:
     BasicRoom_WorldExemple()

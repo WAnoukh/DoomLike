@@ -5,10 +5,10 @@ DLColor::DLColor(float r, float g, float b, float a): r(r), g(g), b(b), a(a)
 
 DLColor::DLColor(int inR, int inG, int inB, int inA)
 {
-    r = static_cast<float>(r) / 255.0f;
-    g = static_cast<float>(g) / 255.0f;
-    b = static_cast<float>(b) / 255.0f;
-    a = static_cast<float>(a) / 255.0f;
+    r = static_cast<float>(inR) / 255.0f;
+    g = static_cast<float>(inG) / 255.0f;
+    b = static_cast<float>(inB) / 255.0f;
+    a = static_cast<float>(inA) / 255.0f;
 }
 
 DLColor::DLColor(unsigned char color[4])
@@ -26,7 +26,7 @@ void DLColor::ToUnsignedChar(unsigned char outColor[4]) const
     outColor[2] = static_cast<unsigned char>(b * 255.0f);
     outColor[3] = static_cast<unsigned char>(a * 255.0f);
 }
-
+    
 const DLColor DLColor::WHITE = DLColor(255, 255, 255);
 const DLColor DLColor::BLACK = DLColor(0, 0, 0);
 const DLColor DLColor::GREY = DLColor(128, 128, 128);

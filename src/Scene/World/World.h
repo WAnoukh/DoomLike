@@ -10,11 +10,10 @@ class World
 public:
     virtual ~World();
 
+    Entity& GetPlayer();
 protected:
     void AddEdge(Edge* inEdge);
     void AddEdge(Edge& inEdge);
-
-    Entity& GetPlayer();
 private:
     std::list<Edge*> edges;
     Entity player;

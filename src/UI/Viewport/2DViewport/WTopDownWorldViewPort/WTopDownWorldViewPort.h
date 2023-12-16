@@ -7,17 +7,19 @@ class WTopDownWorldViewPort : public WViewPort2D
 {
 public:
     WTopDownWorldViewPort() = default;
-    WTopDownWorldViewPort(const TopDownWorldRenderer& inTopDownWorldRenderer);
+    WTopDownWorldViewPort(TopDownWorldRenderer& inTopDownWorldRenderer);
     ~WTopDownWorldViewPort() override = default;
 
     //Getters
     const TopDownWorldRenderer* GetTopDownWorldRenderer() const;
 
     //Setters
-    void SetTopDownWorldRenderer(const TopDownWorldRenderer* inTopDownWorldRenderer);
+    void SetTopDownWorldRenderer(TopDownWorldRenderer* inTopDownWorldRenderer);
 
     void Init() override;
 
+    void RenderViewPort() override;
+
 private:
-    const TopDownWorldRenderer* topDownWorldRenderer = nullptr;
+    TopDownWorldRenderer* topDownWorldRenderer = nullptr;
 };
