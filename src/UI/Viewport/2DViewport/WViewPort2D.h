@@ -1,6 +1,11 @@
 ﻿#pragma once
 
+#include <glm/detail/func_packing_simd.inl>
+#include <glm/detail/type_vec.hpp>
+
 #include "UI/Viewport/WViewPortBase.h"
+
+using namespace glm;
 
 class WViewPort2D : public WViewPortBase
 {
@@ -10,13 +15,13 @@ public:
     //Zoom
     void SetZoom(float inZoom);
     float GetDisplayedZoom() const;
-    
+
     //Panning
     void StartPanning(const float x, const float y);
-    void ApplyPanning(const float x, const float y);
+    virtual void ApplyPanning(const float x, const float y) = 0;
     void StopPanning(bool savePan = true);
     bool IsPanning() const;
-    ImVec2 GetDisplayedOffset() const;    
+    vec2 GetDisplayedOffset() const;    
 
     void Tick(float deltaTime) override;
     void RenderUI() override;

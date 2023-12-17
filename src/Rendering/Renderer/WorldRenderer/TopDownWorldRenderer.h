@@ -27,11 +27,17 @@ public:
 
     void Render() override;
     
+    vec2 WorldSpaceToScreenSpace(vec2 inPosition) const;
+    vec2 ScreenSpaceToWorldSpace(vec2 inPosition) const;
+    vec2 ScreenDeltaToWorldDelta(vec2 inDelta) const;
+
 private:
-    vec2 position = vec2(0, 0);
-    vec2 frustumSize = vec2(1, 1);
+    vec2 position = vec2(0.0f);
+    vec2 frustumSize = vec2(2);
     float rotation = 0;
 
     void DrawPlayer();
-    vec2 WorldSpaceToScreenSpace(vec2 inPosition);
+    void DrawEdges(bool drawEdges = false);
+    void DrawGrid();
+    void DrawCoordinateSystem(vec2 position);
 };

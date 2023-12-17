@@ -31,6 +31,8 @@ void Application::Init() {
 	topDownWorldViewPort = new WTopDownWorldViewPort();
 	topDownWorldViewPort->SetTopDownWorldRenderer(topDownWorldRenderer);
 	UIWidgets.push_back(topDownWorldViewPort);
+	playerController.Init();
+	playerController.SetPlayer(&basicRoom_WorldExemple->GetPlayer());
 }
 
 void Application::Render()
@@ -82,6 +84,7 @@ void Application::Tick(float deltaTime)
 	{
 		Widget->Tick(deltaTime);
 	}
+	playerController.Tick(deltaTime);
 }
 
 Application& Application::GetInstance()
@@ -168,4 +171,10 @@ void Application::MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToC
 	{
 		Widget->MousePositionCallBackEvent(window, guiWantToCapture, xPos, yPos);
 	}
+}
+
+void Application::KeyboardKeyCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int key, int scancode, int action,
+	int mods)
+{
+	inputManager.KeyboardKeyCallBackEvent(key, scancode, action, mods);
 }

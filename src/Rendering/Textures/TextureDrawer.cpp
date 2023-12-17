@@ -46,6 +46,12 @@ void TextureDrawer::DrawCircle(int x, int y, int radius, DLColor color)
 
 void TextureDrawer::DrawLine(int x1, int y1, int x2, int y2, DLColor color)
 {
+    if((x1 <= 0 && x2 <= 0) || (y1 <= 0 && y2 <= 0)
+        || (x1 >= bindTexture->GetWidth() && x2 >= bindTexture->GetWidth())
+        || (y1 >= bindTexture->GetHeight() && y2 >= bindTexture->GetHeight()))
+    {
+        return;
+    }
     if (bindTexture == nullptr)
     {
         std::cerr << "TextureDrawer::DrawCircle: bindTexture is nullptr" << std::endl;

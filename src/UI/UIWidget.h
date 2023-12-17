@@ -1,14 +1,13 @@
 ﻿#pragma once
+#include "DLObject.h"
 #include "Application/Window.h"
 
-class UIWidget
+class UIWidget : public DLObject
 {
 public:
     virtual ~UIWidget() = default;
-
-    virtual void Init() = 0;
+    
     virtual void RenderUI() = 0;
-    virtual void Tick(float DeltaTime) = 0;
 
     virtual void ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xOffset, double yOffset) = 0;
     virtual void MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int button, int action, int mods) = 0;

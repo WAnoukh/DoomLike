@@ -18,7 +18,13 @@ public:
 
     void Init() override;
 
+    void Tick(float deltaTime) override;
+
     void RenderViewPort() override;
+
+    void RenderUI() override;
+
+    void ApplyPanning(const float x, const float y) override;
 
 private:
     TopDownWorldRenderer* topDownWorldRenderer = nullptr;

@@ -21,6 +21,7 @@ public:
     const char* GetGuiName();
     ImVec2 GetViewPortPos();
     ImVec2 GetViewPortSize();
+    ImVec2 GetWindowSize() const;
 
     //Setters
     void SetViewPortTexture(unsigned int inViewPortTexture);
@@ -39,4 +40,5 @@ private:
     unsigned int FBO = 0;
     
     bool isWindowHovered = false;
+    ImVec2 windowSize = ImVec2(1.0f,1.0f);
 };

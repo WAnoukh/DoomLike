@@ -2,8 +2,10 @@
 
 #include <list>
 
+#include "InputManager.h"
 #include "Window.h"
 #include "Rendering/Textures/Texture.h"
+#include "Scene/World/Entities/PlayerController.h"
 
 class WTopDownWorldViewPort;
 class BasicRoom_WorldExemple;
@@ -17,12 +19,16 @@ using namespace std;
 class Application
 {
 public:
-    Application(): Window(*this) { Init(); }
+    Application(): Window(*this)
+    {
+    }
 
     static inline Application* instance = nullptr;
 
     static Application& GetInstance();
 
+    void Init();
+    
     int Run();
 
     unsigned int GetInitialScreenWidth() const { return INITIAL_SCR_WIDTH; };
@@ -37,6 +43,11 @@ public:
     void MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int button, int action, int mods);
 
     void MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xPos, double yPos);
+
+    void KeyboardKeyCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int key, int scancode, int action,
+                                  int mods);
+
+    InputManager& GetInputManager() { return inputManager; }
 
     //Texture Editing
     Texture& GetActiveTexture() { return activeTexture; }
@@ -53,7 +64,6 @@ private:
     double lastX = 0.0f;
     double lastY = 0.0f;
 
-    void Init();
 
     void Render();
 
@@ -64,8 +74,9 @@ private:
 
     list<UIWidget*> UIWidgets = list<UIWidget*>();
 
-
     TopDownWorldRenderer* topDownWorldRenderer = nullptr;
     BasicRoom_WorldExemple* basicRoom_WorldExemple = nullptr;
     WTopDownWorldViewPort* topDownWorldViewPort = nullptr;
+    PlayerController playerController;
+    InputManager inputManager;
 };

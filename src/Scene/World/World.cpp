@@ -23,3 +23,8 @@ Entity& World::GetPlayer()
 {
     return player;
 }
+
+const std::list<Edge*>& World::GetEdges() const
+{
+    return edges;
+}

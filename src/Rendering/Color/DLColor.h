@@ -5,6 +5,7 @@ struct DLColor
     DLColor(float r, float g, float b, float a = 1.0f);
     DLColor(int inR, int inG, int inB, int inA = 255);
     DLColor(unsigned char color[4]);
+    DLColor(float shade);
     void ToUnsignedChar(unsigned char outColor[4]) const;
     static const DLColor WHITE;
     static const DLColor BLACK;

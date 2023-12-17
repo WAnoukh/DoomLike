@@ -23,6 +23,12 @@ void mouse_position_callback(GLFWwindow* window, double xpos, double ypos)
     Application::GetInstance().MousePositionCallBackEvent(window, io.WantCaptureMouse, xpos, ypos);
 }
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    Application::GetInstance().KeyboardKeyCallBackEvent(window, io.WantCaptureKeyboard, key, scancode, action, mods);
+}
+
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
     ImGuiIO& io = ImGui::GetIO();
@@ -55,6 +61,7 @@ int Window::init() {
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetCursorPosCallback(window, mouse_position_callback);
+    glfwSetKeyCallback(window, key_callback);
 
     // glad: load all OpenGL function pointers
     // ---------------------------------------

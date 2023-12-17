@@ -531,6 +531,7 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="src\Application\Application.cpp" />
+    <ClCompile Include="src\Application\InputManager.cpp" />
     <ClCompile Include="src\Application\Window.cpp" />
     <ClCompile Include="src\Helpers\UsefullFunc.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -542,6 +543,7 @@
     <ClCompile Include="src\Rendering\Textures\Texture.cpp" />
     <ClCompile Include="src\Rendering\Textures\TextureDrawer.cpp" />
     <ClCompile Include="src\Scene\World\Entities\Entity.cpp" />
+    <ClCompile Include="src\Scene\World\Entities\PlayerController.cpp" />
     <ClCompile Include="src\Scene\World\World.cpp" />
     <ClCompile Include="src\Scene\World\WorldExemples\BasicRoom\BasicRoom_WorldExemple.cpp" />
     <ClCompile Include="src\Scene\World\WorldGeometry\Edge.cpp" />
@@ -561,7 +563,9 @@
     <ClInclude Include="..\..\..\..\..\imgui\imstb_textedit.h" />
     <ClInclude Include="..\..\..\..\..\imgui\imstb_truetype.h" />
     <ClInclude Include="src\Application\Application.h" />
+    <ClInclude Include="src\Application\InputManager.h" />
     <ClInclude Include="src\Application\Window.h" />
+    <ClInclude Include="src\DLObject.h" />
     <ClInclude Include="src\Helpers\UsefullFunc.h" />
     <ClInclude Include="src\Rendering\Color\DLColor.h" />
     <ClInclude Include="src\Rendering\Renderer\Renderer.h" />
@@ -572,6 +576,7 @@
     <ClInclude Include="src\Rendering\Textures\Texture.h" />
     <ClInclude Include="src\Rendering\Textures\TextureDrawer.h" />
     <ClInclude Include="src\Scene\World\Entities\Entity.h" />
+    <ClInclude Include="src\Scene\World\Entities\PlayerController.h" />
     <ClInclude Include="src\Scene\World\World.h" />
     <ClInclude Include="src\Scene\World\WorldExemples\BasicRoom\BasicRoom_WorldExemple.h" />
     <ClInclude Include="src\Scene\World\WorldGeometry\Edge.h" />

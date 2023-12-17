@@ -9,5 +9,7 @@
 int main()
 {
     srand(time(NULL));
-    return Application::GetInstance().Run();
+    Application& app = Application::GetInstance();
+    app.Init();
+    return app.Run();
 }

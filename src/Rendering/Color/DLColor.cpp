@@ -19,6 +19,14 @@ DLColor::DLColor(unsigned char color[4])
     a = static_cast<float>(color[3]) / 255.0f;
 }
 
+DLColor::DLColor(float shade)
+{
+    r = shade;
+    g = shade;
+    b = shade;
+    a = 1.0f;
+}
+
 void DLColor::ToUnsignedChar(unsigned char outColor[4]) const
 {
     outColor[0] = static_cast<unsigned char>(r * 255.0f);

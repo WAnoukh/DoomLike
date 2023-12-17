@@ -30,3 +30,13 @@ const vec2 Edge::GetPosition(unsigned pointNb) const
         return vec2();
     }
 }
+
+const vec2 Edge::GetStart() const
+{
+    return p1;
+}
+
+const vec2 Edge::GetEnd() const
+{
+    return p2;
+}

@@ -26,10 +26,11 @@ void WViewPort2D::StartPanning(const float x, const float y)
 
 void WViewPort2D::ApplyPanning(const float x, const float y)
 {
-    ImVec2 screenZoom;
+    const auto screenZoom = ImVec2(GetDisplayedZoom(),-GetDisplayedZoom());
+    const auto windowSize = GetWindowSize();
     targetPanOffset = {
-                        targetPanOffset.x + x / screenZoom.x,
-                        targetPanOffset.y + y / screenZoom.y
+                        (targetPanOffset.x + (x / windowSize.x) * screenZoom.x),
+                        (targetPanOffset.y + (y / windowSize.y) * screenZoom.y) 
                         }; 
 }
 
@@ -43,18 +44,18 @@ bool WViewPort2D::IsPanning() const
     return isPanning;
 }
 
-ImVec2 WViewPort2D::GetDisplayedOffset() const
+vec2 WViewPort2D::GetDisplayedOffset() const
 {
-    return {displayedOffset.x, displayedOffset.y};
+    return vec2(displayedOffset.x, displayedOffset.y);
 }
 
 void WViewPort2D::Tick(float deltaTime)
 {
     displayedZoom = AnoukhFun::Damp(displayedZoom, targetZoom, lerpSpeed, deltaTime);
-    const auto vPanOffset = glm::vec2(displayedOffset.x, displayedOffset.y);
-    const auto vTargetPanOffset = glm::vec2(targetPanOffset.x, targetPanOffset.y);
-    const auto newOffset = AnoukhFun::Damp<glm::vec2>( vPanOffset , vTargetPanOffset, lerpSpeed, deltaTime);
-    displayedOffset = {newOffset.x, newOffset.y};
+    //const auto vPanOffset = vec2(displayedOffset.x, displayedOffset.y);
+    //const auto vTargetPanOffset = vec2(targetPanOffset.x, targetPanOffset.y);
+    //const auto newOffset = AnoukhFun::Damp<vec2>( vPanOffset , vTargetPanOffset, lerpSpeed, deltaTime);
+    //displayedOffset = ImVec2(newOffset.x, newOffset.y);
 }
 
 void WViewPort2D::RenderUI()

@@ -13,6 +13,10 @@ public:
 
     const vec2 GetPosition(unsigned pointNb) const;
 
+    const vec2 GetStart() const;
+
+    const vec2 GetEnd() const;
+
 private:
     vec2 p1 = vec2();
     vec2 p2 = vec2();

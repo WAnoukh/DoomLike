@@ -11,6 +11,7 @@ public:
     virtual ~World();
 
     Entity& GetPlayer();
+    const std::list<Edge*>& GetEdges() const;
 protected:
     void AddEdge(Edge* inEdge);
     void AddEdge(Edge& inEdge);

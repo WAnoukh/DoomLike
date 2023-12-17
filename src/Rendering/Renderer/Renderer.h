@@ -9,15 +9,14 @@ public:
     virtual void Render() = 0;
 
     virtual void Init();
-    
-    void SetRenderSize(unsigned int width, unsigned int height);
-    
+
     [[nodiscard]] Texture& GetRenderedTexture();
+
+    [[nodiscard]] unsigned int GetRenderHeight() const;
+    [[nodiscard]] unsigned int GetRenderWidth() const;
 
     void DrawLine(int x1, int y1, int x2, int y2, DLColor color);
 protected:
 private:
-    unsigned int renderHeight = 100;
-    unsigned int renderWidth = 100;
     Texture renderedTexture = Texture();
 };
