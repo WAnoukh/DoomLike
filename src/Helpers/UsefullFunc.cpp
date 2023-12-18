@@ -1,6 +1,7 @@
 ﻿#include "UsefullFunc.h"
 #include <cmath>
 #include <stdlib.h>
+#include <glm/detail/type_vec2.hpp>
 
 namespace AnoukhFun
 {
@@ -17,5 +18,11 @@ namespace AnoukhFun
     float RandomFloat(float min, float max)
     {
         return min + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(max-min)));
+    }
+
+    float Angle(glm::vec2 a, glm::vec2 b)
+    {
+        glm::vec2 c = b - a;
+        return atan2(c.y, c.x);
     }
 }
