@@ -22,4 +22,6 @@ struct DLColor
     float a = 0;
 };
 
+DLColor operator*(const DLColor& color, float scalar);
+
 

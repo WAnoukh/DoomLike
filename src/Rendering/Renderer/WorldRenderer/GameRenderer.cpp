@@ -40,7 +40,7 @@ void GameRenderer::RenderWorld()
                 }
                 else if (row <= (renderedTexture.GetHeight() + lineHeight) / 2)
                 {
-                    renderedTexture.EditPixel(column, row, DLColor::WHITE);
+                    renderedTexture.EditPixel(column, row, DLColor::WHITE * (1 / hitResult.distance));
                 }
                 else
                 {

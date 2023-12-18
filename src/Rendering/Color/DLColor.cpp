@@ -1,5 +1,9 @@
 ﻿#include "DLColor.h"
 
+#include <algorithm>
+
+#include "imgui_impl_opengl3_loader.h"
+
 DLColor::DLColor(float r, float g, float b, float a): r(r), g(g), b(b), a(a)
 {}
 
@@ -34,7 +38,16 @@ void DLColor::ToUnsignedChar(unsigned char outColor[4]) const
     outColor[2] = static_cast<unsigned char>(b * 255.0f);
     outColor[3] = static_cast<unsigned char>(a * 255.0f);
 }
-    
+
+DLColor operator*(const DLColor& color, float scalar)
+{
+    DLColor color1(std::clamp(color.r * scalar, 0.0f, 1.0f),
+                      std::clamp(color.g * scalar, 0.0f, 1.0f),
+                     std::clamp(color.b * scalar, 0.0f, 1.0f),
+                     color.a);
+    return color1;
+}
+
 const DLColor DLColor::WHITE = DLColor(255, 255, 255);
 const DLColor DLColor::BLACK = DLColor(0, 0, 0);
 const DLColor DLColor::GREY = DLColor(128, 128, 128);

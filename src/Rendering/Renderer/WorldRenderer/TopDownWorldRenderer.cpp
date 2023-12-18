@@ -7,6 +7,7 @@
 #include "Rendering/Textures/Texture.h"
 #include "Rendering/Textures/TextureDrawer.h"
 #include "Rendering/Color/DLColor.h"
+#include "Scene/World/Rays/Ray.h"
 
 void TopDownWorldRenderer::Init()
 {
@@ -57,6 +58,16 @@ void TopDownWorldRenderer::Render()
     DrawGrid();
     DrawEdges(true);
     DrawPlayer();
+    Entity& player = GetWorldToRender()->GetPlayer();
+    auto ray = Ray(player.GetPosition(), player.GetRotation());
+    HitResult hitResult;
+    if(GetWorldToRender()->RayCastOnEdges(ray, hitResult, true))
+    {
+        TextureDrawer& textureDrawer = TextureDrawer::GetInstance();
+        textureDrawer.SetBindTexture(&GetRenderedTexture());
+        textureDrawer.DrawCircle(WorldSpaceToScreenSpace(hitResult.point), 3, DLColor::GREEN);
+    }
+    
     texture.SendDataToOpenGl();
 }
 
