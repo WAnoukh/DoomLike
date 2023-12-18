@@ -13,7 +13,7 @@ void PlayerController::Init()
 
 void PlayerController::Tick(float deltaTime)
 {
-    float playerSpeed = 0.4f;
+    float playerSpeed = 2.5f;
     float playerTurnSpeed = 6.0f;
     if(PlayerController::player == nullptr)
         return;

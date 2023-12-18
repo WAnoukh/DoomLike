@@ -38,3 +38,7 @@ Debug
 *.vcxproj.*
 imgui.ini
 .user
+*.bak
+DoomLike.sln.DotSettings.user
+*.vcxproj
+*.sln

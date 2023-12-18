@@ -14,10 +14,14 @@ Texture& Renderer::GetRenderedTexture()
 }
 
 unsigned Renderer::GetRenderHeight() const
-{ return renderedTexture.GetHeight(); }
+{
+    return renderedTexture.GetHeight();
+}
 
 unsigned Renderer::GetRenderWidth() const
-{ return renderedTexture.GetHeight(); }
+{
+    return renderedTexture.GetHeight();
+}
 
 void Renderer::DrawLine(int x1, int y1, int x2, int y2, DLColor color)
 {

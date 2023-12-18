@@ -31,12 +31,7 @@ void WTopDownWorldViewPort::Init()
 void WTopDownWorldViewPort::Tick(float deltaTime)
 {
     WViewPort2D::Tick(deltaTime);
-    vec2 renderSize = -topDownWorldRenderer->GetRenderedTexture().GetSize();
     topDownWorldRenderer->SetFrustumSize(vec2(GetDisplayedZoom()));
-    vec2 offset = GetDisplayedOffset();
-    vec2 offsetPosition = topDownWorldRenderer->GetPosition() ;
-    //topDownWorldRenderer->SetPosition(offsetPosition);
-    const auto frustumSize = topDownWorldRenderer->GetFrustumSize();
 }
 
 void WTopDownWorldViewPort::RenderViewPort()
@@ -47,7 +42,6 @@ void WTopDownWorldViewPort::RenderViewPort()
         return;
     }
     topDownWorldRenderer->Render();
-    SetViewPortTexture(topDownWorldRenderer->GetRenderedTexture().GetTextureId());
 }
 
 void WTopDownWorldViewPort::RenderUI()
