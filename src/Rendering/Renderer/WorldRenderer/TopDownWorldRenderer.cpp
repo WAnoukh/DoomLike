@@ -10,8 +10,8 @@
 
 void TopDownWorldRenderer::Init()
 {
-    GetRenderedTexture().CreateBlankTexture(128,128, GL_RGB);
     WorldRendererBase::Init();
+    GetRenderedTexture().CreateBlankTexture(128,128, GL_RGB);
 }
 
 vec2 TopDownWorldRenderer::GetPosition() const
@@ -57,7 +57,6 @@ void TopDownWorldRenderer::Render()
     DrawGrid();
     DrawEdges(true);
     DrawPlayer();
-    std::cout << "position "<< position.x << " " << position.y << std::endl;
     texture.SendDataToOpenGl();
 }
 
@@ -116,17 +115,16 @@ void TopDownWorldRenderer::DrawGrid()
     }
 }
 
-void TopDownWorldRenderer::DrawCoordinateSystem(vec2 position)
+void TopDownWorldRenderer::DrawCoordinateSystem(vec2 InPosition)
 {
     TextureDrawer& textureDrawer = TextureDrawer::GetInstance();
     textureDrawer.SetBindTexture(&GetRenderedTexture());
-    textureDrawer.DrawLine(WorldSpaceToScreenSpace(position), WorldSpaceToScreenSpace(position + vec2(1, 0)), DLColor::RED);
-    textureDrawer.DrawLine(WorldSpaceToScreenSpace(position), WorldSpaceToScreenSpace(position + vec2(0, 1)), DLColor::GREEN);
+    textureDrawer.DrawLine(WorldSpaceToScreenSpace(InPosition), WorldSpaceToScreenSpace(InPosition + vec2(1, 0)), DLColor::RED);
+    textureDrawer.DrawLine(WorldSpaceToScreenSpace(InPosition), WorldSpaceToScreenSpace(InPosition + vec2(0, 1)), DLColor::GREEN);
 }
 
 vec2 TopDownWorldRenderer::WorldSpaceToScreenSpace(vec2 inPosition) const
 {
-    
     vec2 screenSpacePosition = inPosition - position;
     const auto textureSize = vec2(GetRenderHeight(), GetRenderWidth());
     screenSpacePosition = (screenSpacePosition / (frustumSize) + vec2(0.5f)) * textureSize;

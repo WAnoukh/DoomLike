@@ -68,7 +68,7 @@ void WViewPort2D::ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture,
     if (IsWindowHovered())
     {
         lerpSpeed = 0.0f;
-        SetZoom(GetDisplayedZoom() * (1.0f + static_cast<float>(yOffset)*0.1f));
+        SetZoom(GetDisplayedZoom() * (1.0f - static_cast<float>(yOffset)*0.1f));
         ImGui::SetWindowFocus(GetGuiName());
     }
 }

@@ -15,6 +15,7 @@
 
 #include "Rendering/Renderer/WorldRenderer/TopDownWorldRenderer.h"
 #include "Scene/World/WorldExemples/BasicRoom/BasicRoom_WorldExemple.h"
+#include "UI/Viewport/WSimpleViewPort.h"
 #include "UI/Viewport/2DViewport/WTopDownWorldViewPort/WTopDownWorldViewPort.h"
 
 
@@ -25,12 +26,23 @@ void Application::Init() {
 	glEnable(GL_DEPTH_TEST);
 
 	basicRoom_WorldExemple = new BasicRoom_WorldExemple();
+	
 	topDownWorldRenderer = new TopDownWorldRenderer();
 	topDownWorldRenderer->SetWorldToRender(basicRoom_WorldExemple);
 	topDownWorldRenderer->Init();
+	
 	topDownWorldViewPort = new WTopDownWorldViewPort();
 	topDownWorldViewPort->SetTopDownWorldRenderer(topDownWorldRenderer);
-	UIWidgets.push_back(topDownWorldViewPort);
+	AddWidget(topDownWorldViewPort);
+	
+	gameRenderer = new GameRenderer();
+	gameRenderer->SetWorldToRender(basicRoom_WorldExemple);
+	gameRenderer->Init();
+
+	gameViewPort = new WSimpleViewPort("GameViewPort");
+	gameViewPort->SetRenderer(gameRenderer);
+	AddWidget(gameViewPort);
+	
 	playerController.Init();
 	playerController.SetPlayer(&basicRoom_WorldExemple->GetPlayer());
 }
@@ -177,4 +189,15 @@ void Application::KeyboardKeyCallBackEvent(GLFWwindow* window, bool guiWantToCap
 	int mods)
 {
 	inputManager.KeyboardKeyCallBackEvent(key, scancode, action, mods);
+}
+
+void Application::AddWidget(UIWidget* widget)
+{
+	if(widget == nullptr)
+	{
+		std::cerr << "Application::AddWidget : widget is nullptr." << std::endl;
+		return;
+	}
+	UIWidgets.push_back(widget);
+	widget->Init();
 }
