@@ -8,8 +8,8 @@
 #include "Rendering/Textures/Texture.h"
 #include "Scene/World/Entities/PlayerController.h"
 
-class WSimpleViewPort;
-class WTopDownWorldViewPort;
+class WSimpleViewport;
+class WWorldViewport;
 class BasicRoom_WorldExemple;
 class TopDownWorldRenderer;
 class Renderer;
@@ -81,8 +81,8 @@ private:
     TopDownWorldRenderer* topDownWorldRenderer = nullptr;
     BasicRoom_WorldExemple* basicRoom_WorldExemple = nullptr;
     GameRenderer* gameRenderer = nullptr;
-    WTopDownWorldViewPort* topDownWorldViewPort = nullptr;
-    WSimpleViewPort* gameViewPort = nullptr;
+    WWorldViewport* topDownWorldViewPort = nullptr;
+    WSimpleViewport* gameViewPort = nullptr;
     PlayerController playerController;
     InputManager inputManager;
 };

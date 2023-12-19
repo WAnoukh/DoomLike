@@ -1,14 +1,14 @@
 ﻿#pragma once
-#include "UI/Widgets/Viewport/2DViewport/WViewPort2D.h"
+#include "UI/Widgets/Viewport/2DViewport/WViewport2D.h"
 
 class TopDownWorldRenderer;
 
-class WTopDownWorldViewPort : public WViewPort2D
+class WWorldViewport : public WViewport2D
 {
 public:
-    WTopDownWorldViewPort() = default;
-    WTopDownWorldViewPort(TopDownWorldRenderer& inTopDownWorldRenderer);
-    ~WTopDownWorldViewPort() override = default;
+    WWorldViewport() = default;
+    WWorldViewport(TopDownWorldRenderer& inTopDownWorldRenderer);
+    ~WWorldViewport() override = default;
 
     //Getters
     const TopDownWorldRenderer* GetTopDownWorldRenderer() const;

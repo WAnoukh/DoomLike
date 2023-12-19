@@ -1,20 +1,20 @@
-﻿#include "WTopDownWorldViewPort.h"
+﻿#include "WWorldViewport.h"
 
 #include <iostream>
 
 #include "Rendering/Renderer/WorldRenderer/TopDownWorldRenderer.h"
 
-WTopDownWorldViewPort::WTopDownWorldViewPort(TopDownWorldRenderer& inTopDownWorldRenderer)
+WWorldViewport::WWorldViewport(TopDownWorldRenderer& inTopDownWorldRenderer)
 {
     SetTopDownWorldRenderer(&inTopDownWorldRenderer);
 }
 
-const TopDownWorldRenderer* WTopDownWorldViewPort::GetTopDownWorldRenderer() const
+const TopDownWorldRenderer* WWorldViewport::GetTopDownWorldRenderer() const
 {
     return topDownWorldRenderer;
 }
 
-void WTopDownWorldViewPort::SetTopDownWorldRenderer(TopDownWorldRenderer* inTopDownWorldRenderer)
+void WWorldViewport::SetTopDownWorldRenderer(TopDownWorldRenderer* inTopDownWorldRenderer)
 {
     topDownWorldRenderer = inTopDownWorldRenderer;
     if(topDownWorldRenderer)
@@ -23,18 +23,18 @@ void WTopDownWorldViewPort::SetTopDownWorldRenderer(TopDownWorldRenderer* inTopD
     }
 }
 
-void WTopDownWorldViewPort::Init()
+void WWorldViewport::Init()
 {
-    WViewPort2D::Init();
+    WViewport2D::Init();
 }
 
-void WTopDownWorldViewPort::Tick(float deltaTime)
+void WWorldViewport::Tick(float deltaTime)
 {
-    WViewPort2D::Tick(deltaTime);
+    WViewport2D::Tick(deltaTime);
     topDownWorldRenderer->SetFrustumSize(vec2(GetDisplayedZoom()));
 }
 
-void WTopDownWorldViewPort::RenderViewPort()
+void WWorldViewport::RenderViewPort()
 {
     if(topDownWorldRenderer == nullptr)
     {
@@ -44,9 +44,9 @@ void WTopDownWorldViewPort::RenderViewPort()
     topDownWorldRenderer->Render();
 }
 
-void WTopDownWorldViewPort::RenderUI()
+void WWorldViewport::RenderUI()
 {
-    WViewPort2D::RenderUI();
+    WViewport2D::RenderUI();
     if(topDownWorldRenderer == nullptr)
     {
         std::cerr << "WTopDownWorldViewPort::RenderUI : topDownWorldRenderer is nullptr" << std::endl;
@@ -59,7 +59,7 @@ void WTopDownWorldViewPort::RenderUI()
     ImGui::End();
 }
 
-void WTopDownWorldViewPort::ApplyPanning(const float x, const float y)
+void WWorldViewport::ApplyPanning(const float x, const float y)
 {
     vec2 position = topDownWorldRenderer->GetPosition();
     const auto windowSize = vec2(GetWindowSize().x, GetWindowSize().y);

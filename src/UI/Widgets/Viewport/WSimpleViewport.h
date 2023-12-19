@@ -1,15 +1,15 @@
 ﻿#pragma once
-#include "WViewPortBase.h"
+#include "WViewportBase.h"
 
 class World;
 
-class WSimpleViewPort : public WViewPortBase
+class WSimpleViewport : public WViewportBase
 {
 public:
-    WSimpleViewPort(const char* name = "ViewportBase") : WViewPortBase(name)
+    WSimpleViewport(const char* name = "ViewportBase") : WViewportBase(name)
     {
     }
-    ~WSimpleViewPort() override = default;
+    ~WSimpleViewport() override = default;
 
     void Tick(float deltaTime) override;
     void ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xOffset, double yOffset) override;

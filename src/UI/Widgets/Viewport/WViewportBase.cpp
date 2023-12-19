@@ -1,18 +1,18 @@
-﻿#include "WViewPortBase.h"
+﻿#include "WViewportBase.h"
 #include <glad/glad.h>
 #include <imgui.h>
 
-WViewPortBase::~WViewPortBase()
+WViewportBase::~WViewportBase()
 {
     glDeleteFramebuffers(1, &FBO);
 }
 
-void WViewPortBase::Init()
+void WViewportBase::Init()
 {
     glGenFramebuffers(1, &FBO);
 }
 
-void WViewPortBase::RenderUI()
+void WViewportBase::RenderUI()
 {
     RenderViewPort();
     // Set all margins to 0 for the ImGui window
@@ -32,7 +32,7 @@ void WViewPortBase::RenderUI()
     ImGui::PopStyleVar();
 }
 
-void WViewPortBase::PreRenderViewPort()
+void WViewportBase::PreRenderViewPort()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 
@@ -53,38 +53,38 @@ void WViewPortBase::PreRenderViewPort()
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void WViewPortBase::RenderViewPort()
+void WViewportBase::RenderViewPort()
 {
     PreRenderViewPort();
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-bool WViewPortBase::IsWindowHovered()
+bool WViewportBase::IsWindowHovered()
 {
     return isWindowHovered;
 }
 
-const char* WViewPortBase::GetGuiName()
+const char* WViewportBase::GetGuiName()
 {
     return guiName;
 }
 
-ImVec2 WViewPortBase::GetViewPortPos()
+ImVec2 WViewportBase::GetViewPortPos()
 {
     return viewPortPos;
 }
 
-ImVec2 WViewPortBase::GetViewPortSize()
+ImVec2 WViewportBase::GetViewPortSize()
 {
     return lastSize;
 }
 
-ImVec2 WViewPortBase::GetWindowSize() const
+ImVec2 WViewportBase::GetWindowSize() const
 {
     return windowSize;
 }
 
-void WViewPortBase::SetViewPortTexture(unsigned inViewPortTexture)
+void WViewportBase::SetViewPortTexture(unsigned inViewPortTexture)
 {
     viewPortTexture = inViewPortTexture;
 }

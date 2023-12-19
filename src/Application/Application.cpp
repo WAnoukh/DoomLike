@@ -15,8 +15,8 @@
 
 #include "Rendering/Renderer/WorldRenderer/TopDownWorldRenderer.h"
 #include "Scene/World/WorldExemples/BasicRoom/BasicRoom_WorldExemple.h"
-#include "UI/Widgets/Viewport/WSimpleViewPort.h"
-#include "UI/Widgets/Viewport/2DViewport/WTopDownWorldViewPort/WTopDownWorldViewPort.h"
+#include "UI/Widgets/Viewport/WSimpleViewport.h"
+#include "UI/Widgets/Viewport/2DViewport/WTopDownWorldViewPort/WWorldViewport.h"
 
 
 void Application::Init() {
@@ -31,7 +31,7 @@ void Application::Init() {
 	topDownWorldRenderer->SetWorldToRender(basicRoom_WorldExemple);
 	topDownWorldRenderer->Init();
 	
-	topDownWorldViewPort = new WTopDownWorldViewPort();
+	topDownWorldViewPort = new WWorldViewport();
 	topDownWorldViewPort->SetTopDownWorldRenderer(topDownWorldRenderer);
 	AddWidget(topDownWorldViewPort);
 	
@@ -39,7 +39,7 @@ void Application::Init() {
 	gameRenderer->SetWorldToRender(basicRoom_WorldExemple);
 	gameRenderer->Init();
 
-	gameViewPort = new WSimpleViewPort("GameViewPort");
+	gameViewPort = new WSimpleViewport("GameViewPort");
 	gameViewPort->SetRenderer(gameRenderer);
 	AddWidget(gameViewPort);
 	

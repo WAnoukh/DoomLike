@@ -3,14 +3,14 @@
 #include <glm/detail/func_packing_simd.inl>
 #include <glm/detail/type_vec.hpp>
 
-#include "UI/Widgets/Viewport/WViewPortBase.h"
+#include "UI/Widgets/Viewport/WViewportBase.h"
 
 using namespace glm;
 
-class WViewPort2D : public WViewPortBase
+class WViewport2D : public WViewportBase
 {
 public:
-    WViewPort2D(const char* name = "ViewPort2D") : WViewPortBase(name){}
+    WViewport2D(const char* name = "ViewPort2D") : WViewportBase(name){}
 
     //Zoom
     void SetZoom(float inZoom);

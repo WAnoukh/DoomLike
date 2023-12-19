@@ -8,14 +8,14 @@
 
 class Renderer;
 
-class WViewPortBase : public UIWidget
+class WViewportBase : public UIWidget
 {
 public:
-    WViewPortBase(const char* name = "ViewportBase") : guiName(name)
+    WViewportBase(const char* name = "ViewportBase") : guiName(name)
     {
     }
 
-    ~WViewPortBase() override;
+    ~WViewportBase() override;
 
     //Getters
     const char* GetGuiName();
