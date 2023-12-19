@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "Rendering/Textures/Texture.h"
-#include "UI/UIWidget.h"
+#include "UI/Widgets/UIWidget.h"
 
 #include <string>
 #include <glad/glad.h>
@@ -15,8 +15,8 @@
 
 #include "Rendering/Renderer/WorldRenderer/TopDownWorldRenderer.h"
 #include "Scene/World/WorldExemples/BasicRoom/BasicRoom_WorldExemple.h"
-#include "UI/Viewport/WSimpleViewPort.h"
-#include "UI/Viewport/2DViewport/WTopDownWorldViewPort/WTopDownWorldViewPort.h"
+#include "UI/Widgets/Viewport/WSimpleViewPort.h"
+#include "UI/Widgets/Viewport/2DViewport/WTopDownWorldViewPort/WTopDownWorldViewPort.h"
 
 
 void Application::Init() {

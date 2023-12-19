@@ -4,7 +4,7 @@
 #include <GLFW\glfw3.h>
 #include <imgui.h>
 
-#include "UI/UIWidget.h"
+#include "UI/Widgets/UIWidget.h"
 
 class Renderer;
 
