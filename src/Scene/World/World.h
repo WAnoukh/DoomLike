@@ -10,6 +10,7 @@ struct Ray;
 class World
 {
 public:
+    World();
     virtual ~World();
 
     Entity& GetPlayer();

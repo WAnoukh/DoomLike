@@ -17,23 +17,12 @@ void PlayerController::Tick(float deltaTime)
     float playerTurnSpeed = 6.0f;
     if(PlayerController::player == nullptr)
         return;
+    vec2 input = vec2(inputManager->IsKeyPressed(GLFW_KEY_W) - inputManager->IsKeyPressed(GLFW_KEY_S),
+                      inputManager->IsKeyPressed(GLFW_KEY_Q) - inputManager->IsKeyPressed(GLFW_KEY_E));
+    input *= playerSpeed * deltaTime;
 
-    if (inputManager->IsKeyPressed(GLFW_KEY_W))
-    {
-        player->Foward(playerSpeed * deltaTime);
-    }
-    if (inputManager->IsKeyPressed(GLFW_KEY_S))
-    {
-        player->Foward(-playerSpeed * deltaTime);
-    }
-    if (inputManager->IsKeyPressed(GLFW_KEY_Q))
-    {
-        player->Strafe(playerSpeed * deltaTime);
-    }
-    if (inputManager->IsKeyPressed(GLFW_KEY_E))
-    {
-        player->Strafe(-playerSpeed * deltaTime);
-    }
+    player->Move(input);
+    
     if (inputManager->IsKeyPressed(GLFW_KEY_A))
     {
         player->Turn(playerTurnSpeed * deltaTime);

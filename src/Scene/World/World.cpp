@@ -6,6 +6,11 @@
 #include "Rays/Ray.h"
 #include "WorldGeometry/Edge.h"
 
+World::World()
+{
+    player.SetWorld(this);
+}
+
 World::~World()
 {
     for(Edge*& edge : edges)
