@@ -13,7 +13,17 @@ void GameRenderer::Render()
 void GameRenderer::Init()
 {
     WorldRendererBase::Init();
-    GetRenderedTexture().CreateBlankTexture(128, 128, GL_RGB);
+    GetRenderedTexture().CreateBlankTexture(180, 128, GL_RGB);
+}
+
+float GameRenderer::GetFov() const
+{
+    return fov;
+}
+
+void GameRenderer::SetFov(float inFov)
+{
+    fov = inFov;
 }
 
 void GameRenderer::RenderWorld()
@@ -25,7 +35,8 @@ void GameRenderer::RenderWorld()
     //Raycasting
     for (int column = 0; column < renderedTexture.GetWidth(); column++)
     {
-        const float rayOrientation = player.GetRotation() - ((static_cast<float>(column) / renderedTexture.GetWidth()) - (1.0f / 2.0f)) * fov;
+        const float rate = static_cast<float>(column) / static_cast<float>(renderedTexture.GetWidth()) -0.5f;
+        const float rayOrientation = player.GetRotation() - atan(rate* fov);
         const auto ray = Ray(player.GetPosition(), rayOrientation);
         HitResult hitResult;
         if (worldToRender->RayCastOnEdges(ray, hitResult, true))

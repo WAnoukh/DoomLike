@@ -8,6 +8,9 @@ public:
     void Render() override;
     void Init() override;
 
+    float GetFov() const;
+    void SetFov(float inFov);
+
 private:
     void RenderWorld();
 
