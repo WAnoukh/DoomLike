@@ -83,6 +83,12 @@ void Application::Render()
 	{
 		Widget->RenderUI();
 	}
+
+	ImGui::Begin("Debug");
+	float fov = gameRenderer->GetFov();
+	ImGui::SliderFloat("Fov", &fov, 0.0f, 3.1415926f);
+	gameRenderer->SetFov(fov);
+	ImGui::End();
 	
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
