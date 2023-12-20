@@ -11,9 +11,5 @@ public:
     void Render() override;
 
     void SetWorldToRender(World* inViewedWorld) override;
-
-    void CreateWorldFeatures();
-    void CreateGridFeatures();
-    void CreatePlayerFeature();
 };
 

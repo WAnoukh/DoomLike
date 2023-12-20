@@ -37,6 +37,10 @@ public:
     void DrawLine(vec2 startWorld, vec2 endWorld, DLColor color);
     void DrawLine(vec2 startWorld, float angle, float length, DLColor color);
     void DrawCircle(vec2 centerWorld, int radius, DLColor color);
+
+    void CreateWorldFeatures();
+    void CreateGridFeatures();
+    void CreatePlayerFeature();
 private:
     vec2 position = vec2(0.0f);
     vec2 frustumSize = vec2(2);

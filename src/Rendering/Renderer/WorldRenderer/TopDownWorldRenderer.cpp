@@ -10,6 +10,9 @@
 #include "Scene/World/World.h"
 #include "Scene/World/Rays/Ray.h"
 #include "Scene/World/WorldGeometry/Edge.h"
+#include "TopDownWorldFeatures/WFEdge.h"
+#include "TopDownWorldFeatures/WFLine.h"
+#include "TopDownWorldFeatures/WFPlayer.h"
 #include "TopDownWorldFeatures/WorldFeature.h"
 
 void TopDownWorldRenderer::Init()
@@ -165,6 +168,48 @@ void TopDownWorldRenderer::DrawCircle(vec2 centerWorld, int radius, DLColor colo
     TextureDrawer& textureDrawer = TextureDrawer::GetInstance();
     textureDrawer.SetBindTexture(&GetRenderedTexture());
     textureDrawer.DrawCircle(centerScreen, radius, color);
+}
+
+void TopDownWorldRenderer::CreateWorldFeatures()
+{
+    World* world = GetWorldToRender();
+    if (world == nullptr)
+    {
+        return;
+    }
+    for (Edge* edge : world->GetEdges())
+    {
+        WFEdge* wfEdge = new WFEdge();
+        wfEdge->SetEdge(edge);
+        AddWorldFeature(wfEdge);
+    }
+}
+
+void TopDownWorldRenderer::CreateGridFeatures()
+{
+    for (int i = -50; i < 50; ++i)
+    {
+
+        WFLine* line = new WFLine(vec2(i, -50), vec2(i, 50));
+        WFLine* line2 = new WFLine(vec2(-50, i), vec2(50, i));
+        line->SetColor(DLColor::WHITE * 0.2f);
+        line2->SetColor(DLColor::WHITE * 0.2f);
+        AddWorldFeature(line);
+        AddWorldFeature(line2);
+    }
+}
+
+void TopDownWorldRenderer::CreatePlayerFeature()
+{
+    World* world = GetWorldToRender();
+    if (world == nullptr)
+    {
+        std::cerr << "MinimapRenderer::CreatePlayerFeature : world is null" << std::endl;
+        return;
+    }
+    Entity& player = world->GetPlayer();
+    WFPlayer* wfPlayer = new WFPlayer(&player);
+    AddWorldFeature(wfPlayer);
 }
 
 vec2 TopDownWorldRenderer::WorldSpaceToScreenSpace(vec2 inPosition) const
