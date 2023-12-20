@@ -13,7 +13,7 @@ void GameRenderer::Render()
 void GameRenderer::Init()
 {
     WorldRendererBase::Init();
-    GetRenderedTexture().CreateBlankTexture(180, 128, GL_RGB);
+    GetRenderedTexture().CreateBlankTexture(180 *10, 128 * 10, GL_RGB);
 }
 
 float GameRenderer::GetFov() const
@@ -32,31 +32,33 @@ void GameRenderer::RenderWorld()
     World* worldToRender = GetWorldToRender();
     Entity& player = worldToRender->GetPlayer();
     const std::list<Edge*> edges = worldToRender->GetEdges();
+    const int width = renderedTexture.GetWidth();
+    const int height = renderedTexture.GetHeight();
     //Raycasting
-    for (int column = 0; column < renderedTexture.GetWidth(); column++)
+    for (int column = 0; column < width; column++)
     {
-        const float rate = static_cast<float>(column) / static_cast<float>(renderedTexture.GetWidth()) -0.5f;
-        const float rayOrientation = player.GetRotation() - atan(rate* fov);
+        const float rate = static_cast<float>(column) / static_cast<float>(width) - 0.5f;
+        const float rayOrientation = player.GetRotation() - atan(rate * fov);
         const auto ray = Ray(player.GetPosition(), rayOrientation);
         HitResult hitResult;
         if (worldToRender->RayCastOnEdges(ray, hitResult, true))
         {
             float perpDist = hitResult.distance * cos(rayOrientation - player.GetRotation());
-            float lineHeight = 50 / perpDist;
-            for (int row = 0; row < renderedTexture.GetHeight(); row++)
+            const float lineHeight = 50.0f / perpDist;
+            int row = 0;
+            const int floorHeight = static_cast<int>((static_cast<float>(height) - lineHeight) / 2);
+            const int ceilingHeight = static_cast<int>((static_cast<float>(height) + lineHeight) / 2);
+            for (row; row <= floorHeight; row++)
             {
-                if (row <= (renderedTexture.GetHeight() - lineHeight) / 2)
-                {
-                    renderedTexture.EditPixel(column, row, DLColor::BLACK);
-                }
-                else if (row <= (renderedTexture.GetHeight() + lineHeight) / 2)
-                {
-                    renderedTexture.EditPixel(column, row, DLColor::WHITE * (1 / hitResult.distance));
-                }
-                else
-                {
-                    renderedTexture.EditPixel(column, row, DLColor::BLACK);
-                }
+                renderedTexture.EditPixel(column, row, DLColor::BLACK);
+            }
+            for (row; row <= ceilingHeight; row++)
+            {
+                renderedTexture.EditPixel(column, row, DLColor::WHITE * (1 / hitResult.distance));
+            }
+            for (row; row < height; row++)
+            {
+                renderedTexture.EditPixel(column, row, DLColor::BLACK);
             }
         }
         else
