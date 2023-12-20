@@ -7,7 +7,7 @@ class WorldRendererBase : public Renderer
 {
 public:
     ~WorldRendererBase() override = default;
-    void SetWorldToRender(World* inViewedWorld);
+    virtual void SetWorldToRender(World* inViewedWorld);
     [[nodiscard]] World* GetWorldToRender() const;
     
 private:

@@ -30,6 +30,8 @@ public:
     void RenderUI() override;
     void PreRenderViewPort();
     virtual void RenderViewPort();
+    
+    ImVec2 ScreenSpaceToViewportSpace(ImVec2 screenSpacePos);
 
     bool IsWindowHovered();
 private:

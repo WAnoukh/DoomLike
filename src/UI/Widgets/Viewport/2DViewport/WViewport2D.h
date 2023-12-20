@@ -31,7 +31,6 @@ public:
     void MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int button, int action, int mods) override;
 
     void MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xPos, double yPos) override;
-
 private:
     inline static const float DEFAULT_VIEWPORT_2D_LERPSPEED = 0.0001f;
     float lerpSpeed = DEFAULT_VIEWPORT_2D_LERPSPEED;

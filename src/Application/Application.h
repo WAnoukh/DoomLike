@@ -8,8 +8,9 @@
 #include "Rendering/Textures/Texture.h"
 #include "Scene/World/Entities/PlayerController.h"
 
+class MinimapRenderer;
 class WSimpleViewport;
-class WWorldViewport;
+class WMinimapViewport;
 class BasicRoom_WorldExemple;
 class TopDownWorldRenderer;
 class Renderer;
@@ -78,10 +79,10 @@ private:
 
     list<UIWidget*> UIWidgets = list<UIWidget*>();
 
-    TopDownWorldRenderer* topDownWorldRenderer = nullptr;
+    MinimapRenderer* minimapRenderer = nullptr;
     BasicRoom_WorldExemple* basicRoom_WorldExemple = nullptr;
     GameRenderer* gameRenderer = nullptr;
-    WWorldViewport* topDownWorldViewPort = nullptr;
+    WMinimapViewport* topDownWorldViewPort = nullptr;
     WSimpleViewport* gameViewPort = nullptr;
     PlayerController playerController;
     InputManager inputManager;

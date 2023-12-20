@@ -59,6 +59,12 @@ void WViewportBase::RenderViewPort()
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+ImVec2 WViewportBase::ScreenSpaceToViewportSpace(ImVec2 screenSpacePos)
+{
+    const auto viewPortPos = GetViewPortPos();
+    return ImVec2(screenSpacePos.x - viewPortPos.x, screenSpacePos.y - viewPortPos.y);
+}
+
 bool WViewportBase::IsWindowHovered()
 {
     return isWindowHovered;

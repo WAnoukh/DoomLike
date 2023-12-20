@@ -9,6 +9,7 @@ class TWorldEditor
 {
 public:
     ~TWorldEditor();
+    
     void SetWorld(World* inWorld);
     void NodifyWorld(float mergingDistance = 0.01f);
 

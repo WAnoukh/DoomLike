@@ -2,7 +2,6 @@
 
 #include "Rendering/Color/DLColor.h"
 
-
 void Renderer::Init()
 {
     renderedTexture.GenerateOpenGlTexture();

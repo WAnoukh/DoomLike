@@ -1,4 +1,7 @@
 ﻿#pragma once
+#include <list>
+
+#include "Rendering/Color/DLColor.h"
 #include "Rendering/Textures/Texture.h"
 
 class Renderer 
@@ -16,6 +19,7 @@ public:
     [[nodiscard]] unsigned int GetRenderWidth() const;
 
     void DrawLine(int x1, int y1, int x2, int y2, DLColor color);
+    
 protected:
 private:
     Texture renderedTexture = Texture();

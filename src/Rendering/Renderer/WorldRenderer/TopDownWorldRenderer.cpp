@@ -3,16 +3,19 @@
 #include <iostream>
 #include <list>
 
+#include "Application/Application.h"
 #include "Rendering/Color/DLColor.h"
 #include "Rendering/Textures/Texture.h"
 #include "Rendering/Textures/TextureDrawer.h"
-#include "Rendering/Color/DLColor.h"
+#include "Scene/World/World.h"
 #include "Scene/World/Rays/Ray.h"
+#include "Scene/World/WorldGeometry/Edge.h"
+#include "TopDownWorldFeatures/WorldFeature.h"
 
 void TopDownWorldRenderer::Init()
 {
     WorldRendererBase::Init();
-    GetRenderedTexture().CreateBlankTexture(128,128, GL_RGB);
+    GetRenderedTexture().CreateBlankTexture(128, 128, GL_RGB);
 }
 
 vec2 TopDownWorldRenderer::GetPosition() const
@@ -37,7 +40,7 @@ void TopDownWorldRenderer::SetPosition(vec2 inPosition)
 
 void TopDownWorldRenderer::SetFrustumSize(vec2 inFrustumSize)
 {
-    if(inFrustumSize.x <= 0 || inFrustumSize.y <= 0)
+    if (inFrustumSize.x <= 0 || inFrustumSize.y <= 0)
     {
         std::cerr << "TopDownWorldRenderer::SetFrustumSize : Frustum size must be strictly positive" << std::endl;
         return;
@@ -52,29 +55,39 @@ void TopDownWorldRenderer::SetRotation(float inRotation)
 
 void TopDownWorldRenderer::Render()
 {
-    Texture& texture = GetRenderedTexture();
+    /*
     texture.Fill(DLColor::BLACK);
-    DrawCoordinateSystem(vec2(0.5f,0.5f));
+    DrawCoordinateSystem(vec2(0.5f, 0.5f));
     DrawGrid();
     DrawEdges(true);
     DrawPlayer();
     Entity& player = GetWorldToRender()->GetPlayer();
     auto ray = Ray(player.GetPosition(), player.GetRotation());
     HitResult hitResult;
-    if(GetWorldToRender()->RayCastOnEdges(ray, hitResult, true))
+    if (GetWorldToRender()->RayCastOnEdges(ray, hitResult, true))
     {
         TextureDrawer& textureDrawer = TextureDrawer::GetInstance();
         textureDrawer.SetBindTexture(&GetRenderedTexture());
         textureDrawer.DrawCircle(WorldSpaceToScreenSpace(hitResult.point), 3, DLColor::GREEN);
     }
-    
+    */
+    Texture& texture = GetRenderedTexture();
+    DrawWorldFeatures();
     texture.SendDataToOpenGl();
+}
+
+void TopDownWorldRenderer::DrawWorldFeatures()
+{
+    for (WorldFeature* feature : worldFeatures)
+    {
+        feature->Draw(this);
+    }
 }
 
 void TopDownWorldRenderer::DrawPlayer()
 {
     World* world = GetWorldToRender();
-    if(world == nullptr)
+    if (world == nullptr)
     {
         std::cerr << "TopDownWorldRenderer::DrawPlayer : World to render is null" << std::endl;
         return;
@@ -91,25 +104,23 @@ void TopDownWorldRenderer::DrawPlayer()
 void TopDownWorldRenderer::DrawEdges(bool drawEdges)
 {
     World* world = GetWorldToRender();
-    if(world == nullptr)
+    if (world == nullptr)
     {
         std::cerr << "TopDownWorldRenderer::DrawEdges : World to render is null" << std::endl;
         return;
     }
-    const std::list<Edge*>&  edges = world->GetEdges();
+    const std::list<Edge*>& edges = world->GetEdges();
     for (const Edge* edge : edges)
     {
         const vec2 start = edge->GetStart();
         const vec2 end = edge->GetEnd();
-        const ivec2 startScreenPosition = WorldSpaceToScreenSpace(start);
-        const ivec2 endScreenPosition = WorldSpaceToScreenSpace(end);
         TextureDrawer& textureDrawer = TextureDrawer::GetInstance();
         textureDrawer.SetBindTexture(&GetRenderedTexture());
-        textureDrawer.DrawLine(startScreenPosition, endScreenPosition, DLColor::WHITE);
-        if(drawEdges)
+        DrawLine(start, end, DLColor::WHITE);
+        if (drawEdges)
         {
-            textureDrawer.DrawCircle(startScreenPosition, 3, DLColor::BLUE);
-            textureDrawer.DrawCircle(endScreenPosition, 3, DLColor::BLUE);
+            DrawCircle(start, 3, DLColor::BLUE);
+            DrawCircle(end, 3, DLColor::BLUE);
         }
     }
 }
@@ -121,8 +132,8 @@ void TopDownWorldRenderer::DrawGrid()
     for (int i = -50; i < 50; ++i)
     {
         DLColor color = DLColor(0.2f);
-        textureDrawer.DrawLine(WorldSpaceToScreenSpace(vec2(i, -50)), WorldSpaceToScreenSpace(vec2(i, 50)), color);
-        textureDrawer.DrawLine(WorldSpaceToScreenSpace(vec2(-50, i)), WorldSpaceToScreenSpace(vec2(50, i)), color);
+        DrawLine(vec2(i, -50), vec2(i, 50), color);
+        DrawLine(vec2(-50, i), vec2(50, i), color);
     }
 }
 
@@ -130,8 +141,30 @@ void TopDownWorldRenderer::DrawCoordinateSystem(vec2 InPosition)
 {
     TextureDrawer& textureDrawer = TextureDrawer::GetInstance();
     textureDrawer.SetBindTexture(&GetRenderedTexture());
-    textureDrawer.DrawLine(WorldSpaceToScreenSpace(InPosition), WorldSpaceToScreenSpace(InPosition + vec2(1, 0)), DLColor::RED);
-    textureDrawer.DrawLine(WorldSpaceToScreenSpace(InPosition), WorldSpaceToScreenSpace(InPosition + vec2(0, 1)), DLColor::GREEN);
+    DrawLine(InPosition, InPosition + vec2(1, 0), DLColor::RED);
+    DrawLine(InPosition, InPosition + vec2(0, 1), DLColor::GREEN);
+}
+
+void TopDownWorldRenderer::DrawLine(vec2 startWorld, vec2 endWorld, DLColor color)
+{
+    TextureDrawer& textureDrawer = TextureDrawer::GetInstance();
+    textureDrawer.SetBindTexture(&GetRenderedTexture());
+    textureDrawer.DrawLine(WorldSpaceToScreenSpace(startWorld), WorldSpaceToScreenSpace(endWorld), color);
+}
+
+void TopDownWorldRenderer::DrawLine(vec2 startWorld, float angle, float length, DLColor color)
+{
+    TextureDrawer& textureDrawer = TextureDrawer::GetInstance();
+    textureDrawer.SetBindTexture(&GetRenderedTexture());
+    textureDrawer.DrawLine(WorldSpaceToScreenSpace(startWorld), angle, length, color);
+}
+
+void TopDownWorldRenderer::DrawCircle(vec2 centerWorld, int radius, DLColor color)
+{
+    vec2 centerScreen = WorldSpaceToScreenSpace(centerWorld);
+    TextureDrawer& textureDrawer = TextureDrawer::GetInstance();
+    textureDrawer.SetBindTexture(&GetRenderedTexture());
+    textureDrawer.DrawCircle(centerScreen, radius, color);
 }
 
 vec2 TopDownWorldRenderer::WorldSpaceToScreenSpace(vec2 inPosition) const
@@ -155,4 +188,14 @@ vec2 TopDownWorldRenderer::ScreenDeltaToWorldDelta(vec2 inDelta) const
     const auto textureSize = vec2(GetRenderHeight(), GetRenderWidth());
     vec2 screenSpaceDelta = (inDelta / textureSize) * frustumSize;
     return screenSpaceDelta;
+}
+
+const list<WorldFeature*>& TopDownWorldRenderer::GetWorldFeatures()
+{
+    return worldFeatures;
+}
+
+void TopDownWorldRenderer::AddWorldFeature(WorldFeature* worldFeature)
+{
+    worldFeatures.push_back(worldFeature);
 }

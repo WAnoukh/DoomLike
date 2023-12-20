@@ -13,10 +13,11 @@
 #include <imgui_internal.h>
 #include <iostream>
 
+#include "Rendering/Renderer/WorldRenderer/MinimapRenderer.h"
 #include "Rendering/Renderer/WorldRenderer/TopDownWorldRenderer.h"
 #include "Scene/World/WorldExemples/BasicRoom/BasicRoom_WorldExemple.h"
 #include "UI/Widgets/Viewport/WSimpleViewport.h"
-#include "UI/Widgets/Viewport/2DViewport/WTopDownWorldViewPort/WWorldViewport.h"
+#include "UI/Widgets/Viewport/2DViewport/WTopDownWorldViewPort/WMinimapViewport.h"
 
 
 void Application::Init() {
@@ -27,12 +28,12 @@ void Application::Init() {
 
 	basicRoom_WorldExemple = new BasicRoom_WorldExemple();
 	
-	topDownWorldRenderer = new TopDownWorldRenderer();
-	topDownWorldRenderer->SetWorldToRender(basicRoom_WorldExemple);
-	topDownWorldRenderer->Init();
+	minimapRenderer = new MinimapRenderer();
+	minimapRenderer->SetWorldToRender(basicRoom_WorldExemple);
+	minimapRenderer->Init();
 	
-	topDownWorldViewPort = new WWorldViewport();
-	topDownWorldViewPort->SetTopDownWorldRenderer(topDownWorldRenderer);
+	topDownWorldViewPort = new WMinimapViewport();
+	topDownWorldViewPort->SetMinimapRenderer(minimapRenderer);
 	AddWidget(topDownWorldViewPort);
 	
 	gameRenderer = new GameRenderer();
