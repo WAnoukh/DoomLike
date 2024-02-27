@@ -1,14 +1,7 @@
 ﻿#include "MinimapRenderer.h"
 
-#include <iostream>
-
-#include "Rendering/Textures/TextureDrawer.h"
 #include "Scene/World/World.h"
-#include "Scene/World/WorldGeometry/Edge.h"
-#include "TopDownWorldFeatures/WFEdge.h"
-#include "TopDownWorldFeatures/WFLine.h"
-#include "TopDownWorldFeatures/WFPlayer.h"
-#include "TopDownWorldFeatures/WorldFeature.h"
+#include "TopDownWorldFeatures/WorldFeatures/WFEdge.h"
 
 void MinimapRenderer::Render()
 {

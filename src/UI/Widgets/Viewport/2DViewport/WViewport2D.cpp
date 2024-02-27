@@ -63,7 +63,7 @@ void WViewport2D::RenderUI()
     WViewportBase::RenderUI();
 }
 
-void WViewport2D::ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xOffset, double yOffset)
+void WViewport2D::ScrollCallBackEvent(bool guiWantToCapture, double xOffset, double yOffset)
 {
     if (IsWindowHovered())
     {
@@ -73,7 +73,7 @@ void WViewport2D::ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture,
     }
 }
 
-void WViewport2D::MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int button, int action, int mods)
+void WViewport2D::MouseButtonCallBackEvent(bool guiWantToCapture, int button, int action, int mods)
 {
     if(button == GLFW_MOUSE_BUTTON_RIGHT)
     {
@@ -98,7 +98,7 @@ void WViewport2D::MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCap
     }
 }
 
-void WViewport2D::MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xPos, double yPos)
+void WViewport2D::MousePositionCallBackEvent(bool guiWantToCapture, double xPos, double yPos)
 {
     if(IsPanning())
     {
@@ -108,3 +108,5 @@ void WViewport2D::MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToC
         ImGui::SetWindowFocus(GetGuiName());
     }
 }
+
+

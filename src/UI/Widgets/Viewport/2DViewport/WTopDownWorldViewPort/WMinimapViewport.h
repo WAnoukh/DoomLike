@@ -7,12 +7,12 @@ class TopDownWorldRenderer;
 class WMinimapViewport : public WViewport2D
 {
 public:
-    WMinimapViewport() = default;
-    WMinimapViewport(MinimapRenderer& inMinimapRenderer);
+    WMinimapViewport(const char* name = "WMinimapViewport"): WViewport2D(name){}
+    WMinimapViewport(MinimapRenderer& inMinimapRenderer, const char* name = "WWorldEditor");
     ~WMinimapViewport() override = default;
 
     //Getters
-    const MinimapRenderer* GetMinimapRenderer() const;
+    MinimapRenderer* GetMinimapRenderer() const;
 
     //Setters
     void SetMinimapRenderer(MinimapRenderer* inMinimapRenderer);
@@ -26,7 +26,7 @@ public:
     void RenderUI() override;
 
     void ApplyPanning(const float x, const float y) override;
-
+    
 private:
     MinimapRenderer* minimapRenderer = nullptr;
 };

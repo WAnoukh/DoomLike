@@ -13,7 +13,7 @@ void GameRenderer::Render()
 void GameRenderer::Init()
 {
     WorldRendererBase::Init();
-    GetRenderedTexture().CreateBlankTexture(180 *10, 128 * 10, GL_RGB);
+    GetRenderedTexture().CreateBlankTexture(180, 128, GL_RGB);
 }
 
 float GameRenderer::GetFov() const
@@ -52,9 +52,10 @@ void GameRenderer::RenderWorld()
             {
                 renderedTexture.EditPixel(column, row, DLColor::BLACK);
             }
+            const float shade = (1 / (1+hitResult.distance));
             for (row; row <= ceilingHeight; row++)
             {
-                renderedTexture.EditPixel(column, row, DLColor::WHITE * (1 / hitResult.distance));
+                renderedTexture.EditPixel(column, row, DLColor(shade));
             }
             for (row; row < height; row++)
             {

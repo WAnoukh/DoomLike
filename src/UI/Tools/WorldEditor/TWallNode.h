@@ -7,17 +7,18 @@
 
 class Edge;
 
-class TWallNode
+class TEdgeNode
 {
 public:
+    void GetNetwork(std::set<TEdgeNode*>& outNetwork);
+    const std::set<TEdgeNode*>& GetNeighbors() const;
     
-    void AddNeighbor(TWallNode* inNeighbor);
-    void RemoveNeighbor(TWallNode* inNeighbor);
-    void GetNetwork(std::set<TWallNode*>& outNetwork);
+    void AddNeighbor(TEdgeNode* inNeighbor);
+    void RemoveNeighbor(TEdgeNode* inNeighbor);
     void AddEdgePoint(Edge* inEdge, unsigned int inPointIndex);
     
     void SetPosition(const glm::vec2& inPosition);
-    bool GetPosition(glm::vec2& outPosition) const;
+    bool TryGetPosition(glm::vec2& outPosition) const;
     bool IsPositionMatching(glm::vec2 inPosition, float inEpsilon) const;
 
 private:
@@ -26,6 +27,6 @@ private:
         Edge* edge = nullptr;
         unsigned int pointIndex = 0;
     };
-    std::set<TWallNode*> neighbors;
+    std::set<TEdgeNode*> neighbors;
     std::list<EdgePoint> edgePoints;
 };

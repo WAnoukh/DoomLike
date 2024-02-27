@@ -15,9 +15,11 @@
 
 #include "Rendering/Renderer/WorldRenderer/MinimapRenderer.h"
 #include "Rendering/Renderer/WorldRenderer/TopDownWorldRenderer.h"
+#include "Rendering/Renderer/WorldRenderer/WorldEditorRenderer.h"
 #include "Scene/World/WorldExemples/BasicRoom/BasicRoom_WorldExemple.h"
 #include "UI/Widgets/Viewport/WSimpleViewport.h"
 #include "UI/Widgets/Viewport/2DViewport/WTopDownWorldViewPort/WMinimapViewport.h"
+#include "UI/Widgets/Viewport/2DViewport/WTopDownWorldViewPort/WWorldEditor.h"
 
 
 void Application::Init() {
@@ -31,10 +33,18 @@ void Application::Init() {
 	minimapRenderer = new MinimapRenderer();
 	minimapRenderer->SetWorldToRender(basicRoom_WorldExemple);
 	minimapRenderer->Init();
+
+	minimapViewPort = new WMinimapViewport();
+	minimapViewPort->SetMinimapRenderer(minimapRenderer);
+	AddWidget(minimapViewPort);
+
+	worldEditorRenderer = new WorldEditorRenderer();
+	worldEditorRenderer->SetWorldToRender(basicRoom_WorldExemple);
+	worldEditorRenderer->Init();
 	
-	topDownWorldViewPort = new WMinimapViewport();
-	topDownWorldViewPort->SetMinimapRenderer(minimapRenderer);
-	AddWidget(topDownWorldViewPort);
+	worldEditorWidget = new WWorldEditor();
+	worldEditorWidget->SetWorldEditorRenderer(worldEditorRenderer);
+	AddWidget(worldEditorWidget);
 	
 	gameRenderer = new GameRenderer();
 	gameRenderer->SetWorldToRender(basicRoom_WorldExemple);
@@ -158,7 +168,7 @@ void Application::ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture,
 {
 	for(auto& Widget : UIWidgets)
 	{
-		Widget->ScrollCallBackEvent(window, guiWantToCapture, xoffset, yoffset);
+		Widget->ScrollCallBackEvent(guiWantToCapture, xoffset, yoffset);
 	}
 }
 
@@ -166,7 +176,7 @@ void Application::MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCap
 {
 	for(auto& Widget : UIWidgets)
 	{
-		Widget->MouseButtonCallBackEvent(window, guiWantToCapture, button, action, mods);
+		Widget->MouseButtonCallBackEvent(guiWantToCapture, button, action, mods);
 	}
 	if (button == GLFW_MOUSE_BUTTON_LEFT)
 	{
@@ -188,7 +198,7 @@ void Application::MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToC
 	lastY = yPos;
 	for(auto& Widget : UIWidgets)
 	{
-		Widget->MousePositionCallBackEvent(window, guiWantToCapture, xPos, yPos);
+		Widget->MousePositionCallBackEvent(guiWantToCapture, xPos, yPos);
 	}
 }
 

@@ -6,7 +6,7 @@
 
 TWorldEditor::~TWorldEditor()
 {
-    for (TWallNode*& wallNode : wallNodes)
+    for (TEdgeNode*& wallNode : wallNodes)
     {
         delete wallNode;
     }
@@ -25,6 +25,7 @@ void TWorldEditor::NodifyWorld(float mergingDistance)
         return;
     }
     auto edges = world->GetEdges();
+    std::map<Edge*, TEdgeNode*> edgeToNode;
     for(Edge* edge : edges)
     {
         bool firstEdgeMatched = false;
@@ -34,11 +35,37 @@ void TWorldEditor::NodifyWorld(float mergingDistance)
             if(!firstEdgeMatched && wallNode->IsPositionMatching(edge->GetStart(), mergingDistance))
             {
                 wallNode->AddEdgePoint(edge, 0);
+                if(edgeToNode.count(edge))
+                {
+                    TEdgeNode* otherNode = edgeToNode.at(edge);
+                    if(otherNode != wallNode)
+                    {
+                        wallNode->AddNeighbor(otherNode);
+                        otherNode->AddNeighbor(wallNode);
+                    }
+                }
+                else
+                {
+                    edgeToNode[edge] = wallNode;
+                }
                 firstEdgeMatched = true;
             }
             if(!secondEdgeMatched && wallNode->IsPositionMatching(edge->GetEnd(), mergingDistance))
             {
                 wallNode->AddEdgePoint(edge, 1);
+                if(edgeToNode.count(edge))
+                {
+                    TEdgeNode* otherNode = edgeToNode.at(edge);
+                    if(otherNode != wallNode)
+                    {
+                        wallNode->AddNeighbor(otherNode);
+                        otherNode->AddNeighbor(wallNode);
+                    }
+                }
+                else
+                {
+                    edgeToNode[edge] = wallNode;
+                }
                 secondEdgeMatched = true;
             }
             if(firstEdgeMatched && secondEdgeMatched)
@@ -48,27 +75,29 @@ void TWorldEditor::NodifyWorld(float mergingDistance)
         }
         if (!firstEdgeMatched)
         {
-            TWallNode* newWallNode = new TWallNode();
+            TEdgeNode* newWallNode = new TEdgeNode();
             newWallNode->AddEdgePoint(edge, 0);
             wallNodes.push_back(newWallNode);
+            edgeToNode[edge] = newWallNode;
         }
         if (!secondEdgeMatched)
         {
-            TWallNode* newWallNode = new TWallNode();
+            TEdgeNode* newWallNode = new TEdgeNode();
             newWallNode->AddEdgePoint(edge, 1);
             wallNodes.push_back(newWallNode);
+            edgeToNode[edge] = newWallNode;
         }
     }
 }
 
-bool TWorldEditor::GetClosestNodeInRadius(const glm::vec2& inPosition, float inRadius, TWallNode*& outNode) const
+bool TWorldEditor::GetClosestNodeInRadius(const glm::vec2& inPosition, float inRadius, TEdgeNode*& outNode) const
 {
     float distance = 0;
     bool firstNode = true;
     for(auto& wallNode : wallNodes)
     {
         glm::vec2 wallNodePosition;
-        if(wallNode->GetPosition(wallNodePosition))
+        if(wallNode->TryGetPosition(wallNodePosition))
         {
             float currentDistance = glm::distance(wallNodePosition, inPosition);
             if(currentDistance < inRadius)
@@ -88,4 +117,9 @@ bool TWorldEditor::GetClosestNodeInRadius(const glm::vec2& inPosition, float inR
         }
     }
     return !firstNode;
+}
+
+const std::list<TEdgeNode*>& TWorldEditor::GetWallNodes() const
+{
+    return wallNodes;
 }

@@ -1,8 +1,6 @@
 ﻿#pragma once
 #include "WorldRendererBase.h"
 #include "Application/Application.h"
-#include "Application/Application.h"
-#include "Application/Application.h"
 #include "glm/glm.hpp"
 
 class WorldFeature;
@@ -30,6 +28,7 @@ public:
     vec2 WorldSpaceToScreenSpace(vec2 inPosition) const;
     vec2 ScreenSpaceToWorldSpace(vec2 inPosition) const;
     vec2 ScreenDeltaToWorldDelta(vec2 inDelta) const;
+    vec2 WorldDeltaToScreenDelta(vec2 inDelta) const;
 
     const list<WorldFeature*>& GetWorldFeatures();
     void AddWorldFeature(WorldFeature* worldFeature);

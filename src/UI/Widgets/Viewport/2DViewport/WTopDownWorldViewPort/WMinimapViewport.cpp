@@ -5,12 +5,12 @@
 #include "Rendering/Renderer/WorldRenderer/MinimapRenderer.h"
 #include "Rendering/Renderer/WorldRenderer/TopDownWorldRenderer.h"
 
-WMinimapViewport::WMinimapViewport(MinimapRenderer& inMinimapRenderer)
+WMinimapViewport::WMinimapViewport(MinimapRenderer& inMinimapRenderer, const char* name): WViewport2D(name)
 {
     SetMinimapRenderer(&inMinimapRenderer);
 }
 
-const MinimapRenderer* WMinimapViewport::GetMinimapRenderer() const
+MinimapRenderer* WMinimapViewport::GetMinimapRenderer() const
 {
     return minimapRenderer;
 }

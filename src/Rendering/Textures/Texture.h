@@ -13,6 +13,8 @@ public:
     void CreateBlankTexture(unsigned inWidth, unsigned inHeight, GLenum inFormat);
     void EditPixel(int inX, int inY, DLColor color, bool debug = false) const;
 
+    void LoadFromFile(const char* path);
+
     void GenerateOpenGlTexture();
     void SendDataToOpenGl() const;
     unsigned int GetTextureId() const;

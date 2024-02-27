@@ -22,6 +22,7 @@ public:
     ImVec2 GetViewPortPos();
     ImVec2 GetViewPortSize();
     ImVec2 GetWindowSize() const;
+    ImVec2 GetMousePosInViewport();
 
     //Setters
     void SetViewPortTexture(unsigned int inViewPortTexture);

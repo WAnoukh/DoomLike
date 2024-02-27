@@ -12,9 +12,9 @@ public:
     ~WSimpleViewport() override = default;
 
     void Tick(float deltaTime) override;
-    void ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xOffset, double yOffset) override;
-    void MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int button, int action, int mods) override;
-    void MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xPos, double yPos) override;
+    void ScrollCallBackEvent(bool guiWantToCapture, double xOffset, double yOffset) override;
+    void MouseButtonCallBackEvent(bool guiWantToCapture, int button, int action, int mods) override;
+    void MousePositionCallBackEvent(bool guiWantToCapture, double xPos, double yPos) override;
     void Init() override;
     void RenderUI() override;
     void RenderViewPort() override;

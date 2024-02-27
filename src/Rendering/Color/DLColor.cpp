@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "imgui_impl_opengl3_loader.h"
+#include "UI/Tools/WorldEditor/TWallNode.h"
 
 DLColor::DLColor(float r, float g, float b, float a): r(r), g(g), b(b), a(a)
 {}

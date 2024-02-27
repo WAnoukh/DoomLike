@@ -8,16 +8,16 @@ void WSimpleViewport::Tick(float deltaTime)
 {
 }
 
-void WSimpleViewport::ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xOffset, double yOffset)
+void WSimpleViewport::ScrollCallBackEvent(bool guiWantToCapture, double xOffset, double yOffset)
 {
 }
 
-void WSimpleViewport::MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int button, int action,
-    int mods)
+void WSimpleViewport::MouseButtonCallBackEvent(bool guiWantToCapture, int button, int action,
+                                               int mods)
 {
 }
 
-void WSimpleViewport::MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xPos, double yPos)
+void WSimpleViewport::MousePositionCallBackEvent(bool guiWantToCapture, double xPos, double yPos)
 {
 }
 

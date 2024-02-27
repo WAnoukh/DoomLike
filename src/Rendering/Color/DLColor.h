@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "UI/Tools/WorldEditor/TWallNode.h"
 
 struct DLColor
 {

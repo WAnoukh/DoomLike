@@ -13,9 +13,11 @@ public:
     void SetWorld(World* inWorld);
     void NodifyWorld(float mergingDistance = 0.01f);
 
-    bool GetClosestNodeInRadius(const glm::vec2& inPosition, float inRadius, TWallNode*& outNode) const;
+    bool GetClosestNodeInRadius(const glm::vec2& inPosition, float inRadius, TEdgeNode*& outNode) const;
+
+    const std::list<TEdgeNode*>& GetWallNodes() const;
     
 private:
     World* world = nullptr;
-    std::list<TWallNode*> wallNodes;
+    std::list<TEdgeNode*> wallNodes;
 };

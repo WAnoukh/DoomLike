@@ -2,17 +2,17 @@
 
 #include "Scene/World/WorldGeometry/Edge.h"
 
-void TWallNode::AddNeighbor(TWallNode* inNeighbor)
+void TEdgeNode::AddNeighbor(TEdgeNode* inNeighbor)
 {
     neighbors.insert(inNeighbor);
 }
 
-void TWallNode::RemoveNeighbor(TWallNode* inNeighbor)
+void TEdgeNode::RemoveNeighbor(TEdgeNode* inNeighbor)
 {
     neighbors.erase(inNeighbor);
 }
 
-void TWallNode::GetNetwork(std::set<TWallNode*>& outNetwork)
+void TEdgeNode::GetNetwork(std::set<TEdgeNode*>& outNetwork)
 {
     if(outNetwork.contains(this))
     {
@@ -25,12 +25,17 @@ void TWallNode::GetNetwork(std::set<TWallNode*>& outNetwork)
     }
 }
 
-void TWallNode::AddEdgePoint(Edge* inEdge, unsigned inPointIndex)
+const std::set<TEdgeNode*>& TEdgeNode::GetNeighbors() const
+{
+    return neighbors;
+}
+
+void TEdgeNode::AddEdgePoint(Edge* inEdge, unsigned inPointIndex)
 {
     edgePoints.push_back({inEdge, inPointIndex});
 }
 
-bool TWallNode::GetPosition(glm::vec2& outPosition) const
+bool TEdgeNode::TryGetPosition(glm::vec2& outPosition) const
 {
     if(edgePoints.empty())
     {
@@ -40,7 +45,7 @@ bool TWallNode::GetPosition(glm::vec2& outPosition) const
     return true;
 }
 
-bool TWallNode::IsPositionMatching(glm::vec2 inPosition, float inEpsilon) const
+bool TEdgeNode::IsPositionMatching(glm::vec2 inPosition, float inEpsilon) const
 {
     for (auto& edgePoint : edgePoints)
     {
@@ -52,7 +57,7 @@ bool TWallNode::IsPositionMatching(glm::vec2 inPosition, float inEpsilon) const
     return true;
 }
 
-void TWallNode::SetPosition(const glm::vec2& inPosition)
+void TEdgeNode::SetPosition(const glm::vec2& inPosition)
 {
     for (auto& edgePoint : edgePoints)
     {

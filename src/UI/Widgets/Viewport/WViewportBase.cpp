@@ -90,6 +90,13 @@ ImVec2 WViewportBase::GetWindowSize() const
     return windowSize;
 }
 
+ImVec2 WViewportBase::GetMousePosInViewport()
+{
+    const auto viewportPos = GetViewPortPos();
+    const auto mousePos = ImGui::GetMousePos();
+    return ImVec2(mousePos.x - viewportPos.x, mousePos.y - viewportPos.y);
+}
+
 void WViewportBase::SetViewPortTexture(unsigned inViewPortTexture)
 {
     viewPortTexture = inViewPortTexture;

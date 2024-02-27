@@ -10,9 +10,9 @@
 #include "Scene/World/World.h"
 #include "Scene/World/Rays/Ray.h"
 #include "Scene/World/WorldGeometry/Edge.h"
-#include "TopDownWorldFeatures/WFEdge.h"
-#include "TopDownWorldFeatures/WFLine.h"
-#include "TopDownWorldFeatures/WFPlayer.h"
+#include "TopDownWorldFeatures/WorldFeatures/WFEdge.h"
+#include "TopDownWorldFeatures/ShapeFeatures/WFLine.h"
+#include "TopDownWorldFeatures/WorldFeatures/WFPlayer.h"
 #include "TopDownWorldFeatures/WorldFeature.h"
 
 void TopDownWorldRenderer::Init()
@@ -232,6 +232,13 @@ vec2 TopDownWorldRenderer::ScreenDeltaToWorldDelta(vec2 inDelta) const
 {
     const auto textureSize = vec2(GetRenderHeight(), GetRenderWidth());
     vec2 screenSpaceDelta = (inDelta / textureSize) * frustumSize;
+    return screenSpaceDelta;
+}
+
+vec2 TopDownWorldRenderer::WorldDeltaToScreenDelta(vec2 inDelta) const
+{
+    const auto textureSize = vec2(GetRenderHeight(), GetRenderWidth());
+    vec2 screenSpaceDelta = (inDelta / frustumSize) * textureSize;
     return screenSpaceDelta;
 }
 

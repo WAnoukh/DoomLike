@@ -21,16 +21,16 @@ public:
     virtual void ApplyPanning(const float x, const float y) = 0;
     void StopPanning(bool savePan = true);
     bool IsPanning() const;
-    vec2 GetDisplayedOffset() const;    
+    vec2 GetDisplayedOffset() const;
 
     void Tick(float deltaTime) override;
     void RenderUI() override;
 
-    void ScrollCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xOffset, double yOffset) override;
+    void ScrollCallBackEvent(bool guiWantToCapture, double xOffset, double yOffset) override;
+    void MouseButtonCallBackEvent(bool guiWantToCapture, int button, int action, int mods) override;
+    void MousePositionCallBackEvent(bool guiWantToCapture, double xPos, double yPos) override;
 
-    void MouseButtonCallBackEvent(GLFWwindow* window, bool guiWantToCapture, int button, int action, int mods) override;
-
-    void MousePositionCallBackEvent(GLFWwindow* window, bool guiWantToCapture, double xPos, double yPos) override;
+    
 private:
     inline static const float DEFAULT_VIEWPORT_2D_LERPSPEED = 0.0001f;
     float lerpSpeed = DEFAULT_VIEWPORT_2D_LERPSPEED;
