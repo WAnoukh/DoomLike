@@ -8,6 +8,8 @@ struct DLColor
     DLColor(unsigned char color[4]);
     DLColor(float shade);
     void ToUnsignedChar(unsigned char outColor[4]) const;
+    void SetColor(float inR, float inG, float inB, float inA = 1.0f);
+    void SetColor(float inGrey);
     static const DLColor WHITE;
     static const DLColor BLACK;
     static const DLColor GREY;
@@ -24,5 +26,32 @@ struct DLColor
 };
 
 DLColor operator*(const DLColor& color, float scalar);
+
+struct DLRawColor
+{
+    DLRawColor(unsigned char inR, unsigned char inG, unsigned char inB, unsigned char inA = 255);
+    DLRawColor() = default;
+    DLRawColor(unsigned char inColor[], size_t size = 4);
+    DLRawColor(unsigned char inGrey);
+    DLRawColor(const DLColor& color);
+    void SetColor(float shade);
+    void Divide(float scalar);
+    unsigned char* ToUnsignedChar() const;
+    static const DLRawColor WHITE;
+    static const DLRawColor BLACK;
+    static const DLRawColor GREY;
+    static const DLRawColor RED;
+    static const DLRawColor GREEN;
+    static const DLRawColor BLUE;
+    static const DLRawColor YELLOW;
+    static const DLRawColor MAGENTA;
+    static const DLRawColor CYAN;
+    unsigned char r = 0;
+    unsigned char g = 0;
+    unsigned char b = 0;
+    unsigned char a = 0;
+};
+
+
 
 

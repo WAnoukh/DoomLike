@@ -1,6 +1,6 @@
 #include "Window.h"
 
-#include <imgui_impl_glfw.h>
+#include "imgui_impl_glfw.h"
 #include <imgui_impl_opengl3.h>
 #include <iostream>
 
@@ -49,7 +49,7 @@ int Window::init() {
 
     // glfw window creation
     // --------------------
-    window = glfwCreateWindow(application.GetInitialScreenWidth(), application.GetInitialScreenHeight(), "DoomLike", NULL, NULL);
+    window = glfwCreateWindow(application.GetInitialScreenWidth(), application.GetInitialScreenHeight(), "DoomLikeEditor", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -71,8 +71,6 @@ int Window::init() {
         return -1;
     }
 
-    glfwSwapInterval(1);
-
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -82,6 +80,7 @@ int Window::init() {
     ImGui_ImplOpenGL3_Init("#version 330 core");
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     io.ConfigDockingWithShift = false;
+    glfwSwapInterval( 0 );
         
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------

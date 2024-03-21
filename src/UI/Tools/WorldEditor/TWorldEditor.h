@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "TWallNode.h"
 #include "Application/Application.h"
-#include "Application/Application.h"
 
 class World;
 

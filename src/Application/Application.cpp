@@ -1,8 +1,8 @@
 #include "Application.h"
-#include "Rendering/Textures/Texture.h"
 #include "UI/Widgets/UIWidget.h"
 
 #include <string>
+#include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -13,6 +13,7 @@
 #include <imgui_internal.h>
 #include <iostream>
 
+#include "Rendering/Renderer/TextureRenderer/TextureRenderer.h"
 #include "Rendering/Renderer/WorldRenderer/MinimapRenderer.h"
 #include "Rendering/Renderer/WorldRenderer/TopDownWorldRenderer.h"
 #include "Rendering/Renderer/WorldRenderer/WorldEditorRenderer.h"
@@ -54,6 +55,7 @@ void Application::Init() {
 	gameViewPort->SetRenderer(gameRenderer);
 	AddWidget(gameViewPort);
 	
+	
 	playerController.Init();
 	playerController.SetPlayer(&basicRoom_WorldExemple->GetPlayer());
 }
@@ -61,8 +63,6 @@ void Application::Init() {
 void Application::Render()
 {
 	Window.PreRender();
-
-	activeTexture.SendDataToOpenGl();
 	
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
@@ -114,6 +114,21 @@ void Application::Tick(float deltaTime)
 		Widget->Tick(deltaTime);
 	}
 	playerController.Tick(deltaTime);
+	lastDeltaTimesIndex = (lastDeltaTimesIndex + 1) % 200;
+	lastDeltaTimes[lastDeltaTimesIndex] = deltaTime;
+	const string title = "FPS : " + to_string(static_cast<int>(GetFps()));
+	glfwSetWindowTitle(Window.getGLFWwindow(), title.c_str());
+}
+
+float Application::GetFps()
+{
+	float sum = 0.0f;
+	for (auto& lastDeltaTime : lastDeltaTimes)
+	{
+		sum += lastDeltaTime;
+	}
+	sum /= 200;
+	return 1 / sum;
 }
 
 Application& Application::GetInstance()
@@ -133,9 +148,6 @@ int Application::Run() {
 	}
 	float lastFrame = 0.0f;
 
-	activeTexture.CreateBlankTexture(TEXTURE_W, TEXTURE_H, GL_RGB);
-	activeTexture.GenerateOpenGlTexture();
-	activeTexture.SendDataToOpenGl();
 	
 	// render loop
 	// -----------
@@ -144,10 +156,8 @@ int Application::Run() {
 		const auto currentFrame = static_cast<float>(glfwGetTime());
 		const float deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
-		
 		Tick(deltaTime);
 		Render();
-		
 		glfwPollEvents();
 	}
 	Window.terminate();

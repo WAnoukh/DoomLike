@@ -12,7 +12,7 @@ public:
         AddEdge(new Edge(-1.0f,-1.0f,1.0f,-1.0f));
         AddEdge(new Edge(1.0f,-1.0f,1.0f,1.0f));
 
-        Entity& player = GetPlayer();
+        Player& player = GetPlayer();
         player.SetPosition(vec3(0,0,0));
     }
 };

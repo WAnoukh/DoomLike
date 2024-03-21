@@ -4,7 +4,7 @@
 class World;
 using namespace glm;
 
-class Entity : public DLObject
+class Player : public DLObject
 {
 public:
     vec3 GetPosition() const;

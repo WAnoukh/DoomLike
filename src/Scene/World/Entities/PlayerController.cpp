@@ -1,9 +1,10 @@
 ﻿#include "PlayerController.h"
 
-#include "glad/glad.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <GLFW/glfw3.h>
 
-#include "Entity.h"
+#include "Player.h"
 #include "Application/Application.h"
 
 void PlayerController::Init()
@@ -33,7 +34,7 @@ void PlayerController::Tick(float deltaTime)
     }
 }
 
-void PlayerController::SetPlayer(Entity* inPlayer)
+void PlayerController::SetPlayer(Player* inPlayer)
 {
     player = inPlayer;
 }

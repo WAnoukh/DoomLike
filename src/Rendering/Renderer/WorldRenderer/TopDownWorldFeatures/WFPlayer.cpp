@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "Rendering/Renderer/WorldRenderer/TopDownWorldRenderer.h"
-#include "Scene/World/Entities/Entity.h"
+#include "Scene/World/Entities/Player.h"
 
 void WFPlayer::Draw(TopDownWorldRenderer* renderer)
 {
@@ -21,7 +21,7 @@ void WFPlayer::Draw(TopDownWorldRenderer* renderer)
     renderer->DrawCircle(player->GetPosition(), 5, positionColor);
 }
 
-void WFPlayer::SetPlayer(Entity* inPlayer)
+void WFPlayer::SetPlayer(Player* inPlayer)
 {
     player = inPlayer;
 }

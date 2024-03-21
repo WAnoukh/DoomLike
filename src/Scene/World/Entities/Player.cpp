@@ -1,4 +1,4 @@
-﻿#include "Entity.h"
+﻿#include "Player.h"
 
 #include <corecrt_math_defines.h>
 #include <iostream>
@@ -7,32 +7,32 @@
 #include "Scene/World/World.h"
 #include "Scene/World/Rays/Ray.h"
 
-vec3 Entity::GetPosition() const
+vec3 Player::GetPosition() const
 {
     return position;
 }
 
-float Entity::GetRotation() const
+float Player::GetRotation() const
 {
     return rotation;
 }
 
-void Entity::SetPosition(vec3 inPosition)
+void Player::SetPosition(vec3 inPosition)
 {
     position = inPosition;
 }
 
-void Entity::SetRotation(float inRotation)
+void Player::SetRotation(float inRotation)
 {
     rotation = inRotation;
 }
 
-void Entity::Turn(float angle)
+void Player::Turn(float angle)
 {
     rotation += angle;
 }
 
-void Entity::Foward(float distance)
+void Player::Foward(float distance)
 {
     if(world == nullptr)
     {
@@ -55,7 +55,7 @@ void Entity::Foward(float distance)
     position.y += minDist * sin(distanceDirection);
 }
 
-void Entity::Move(vec2 relativeSpeed)
+void Player::Move(vec2 relativeSpeed)
 {
     if(relativeSpeed.y != 0)
     {
@@ -67,7 +67,7 @@ void Entity::Move(vec2 relativeSpeed)
     }
 }
 
-void Entity::Strafe(float distance)
+void Player::Strafe(float distance)
 {
     if(world == nullptr)
     {
@@ -90,15 +90,15 @@ void Entity::Strafe(float distance)
     position.y += minDist * sin(distanceDirection);
 }
 
-void Entity::Init()
+void Player::Init()
 {
 }
 
-void Entity::Tick(float deltaTime)
+void Player::Tick(float deltaTime)
 {
 }
 
-void Entity::SetWorld(World* inWorld)
+void Player::SetWorld(World* inWorld)
 {
     world = inWorld;
 }

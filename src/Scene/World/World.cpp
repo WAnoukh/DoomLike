@@ -4,11 +4,15 @@
 
 #include "Helpers/UsefullFunc.h"
 #include "Rays/Ray.h"
+#include "Rendering/Textures/Texture.h"
 #include "WorldGeometry/Edge.h"
 
 World::World()
 {
     player.SetWorld(this);
+    WallTexture = new Texture();
+    WallTexture->LoadFromFile("res/Textures/test1.png");
+    WallTexture->SendDataToOpenGl();
 }
 
 World::~World()
@@ -18,6 +22,7 @@ World::~World()
         delete edge;
     }
     edges.clear();
+    delete WallTexture;
 }
 
 void World::AddEdge(Edge* inEdge)
@@ -30,7 +35,7 @@ void World::AddEdge(Edge& inEdge)
     edges.push_front(&inEdge);
 }
 
-Entity& World::GetPlayer()
+Player& World::GetPlayer()
 {
     return player;
 }

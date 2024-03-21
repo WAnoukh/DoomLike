@@ -1,8 +1,9 @@
 ﻿#pragma once
 #include <list>
 
-#include "Entities/Entity.h"
+#include "Entities/Player.h"
 
+class Texture;
 struct HitResult;
 class Edge;
 struct Ray;
@@ -13,15 +14,17 @@ public:
     World();
     virtual ~World();
 
-    Entity& GetPlayer();
+    Player& GetPlayer();
     const std::list<Edge*>& GetEdges() const;
 
     bool RayCastOnEdges(Ray ray, HitResult& outHitResult, bool sorted = false);
     static bool RayCastOnEdge(Ray ray, Edge* edge, HitResult& outHitResult);
+
+    Texture* WallTexture;
 protected:
     void AddEdge(Edge* inEdge);
     void AddEdge(Edge& inEdge);
 private:
     std::list<Edge*> edges;
-    Entity player;
+    Player player;
 };

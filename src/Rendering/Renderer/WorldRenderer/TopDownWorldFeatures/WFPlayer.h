@@ -3,21 +3,21 @@
 #include "Rendering/Color/DLColor.h"
 
 class TopDownWorldRenderer;
-class Entity;
+class Player;
 
 class WFPlayer : public WorldFeature
 {
 public:
-    WFPlayer(Entity* playerEntity) : player(playerEntity) {}
+    WFPlayer(Player* playerEntity) : player(playerEntity) {}
 
     void Draw(TopDownWorldRenderer* renderer);
 
-    void SetPlayer(Entity* inPlayer);
+    void SetPlayer(Player* inPlayer);
 
     void SetPositionColor(DLColor inPositionColor);
     void SetDirectionColor(DLColor inDirectionColor);
 private:
-    Entity* player = nullptr;
+    Player* player = nullptr;
     DLColor positionColor = DLColor::RED;
     DLColor directionColor = DLColor::YELLOW;
 };

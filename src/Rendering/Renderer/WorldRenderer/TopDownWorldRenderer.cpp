@@ -95,7 +95,7 @@ void TopDownWorldRenderer::DrawPlayer()
         std::cerr << "TopDownWorldRenderer::DrawPlayer : World to render is null" << std::endl;
         return;
     }
-    const Entity& player = world->GetPlayer();
+    const Player& player = world->GetPlayer();
     const vec2 playerPosition = player.GetPosition();
     const ivec2 playerScreenPosition = WorldSpaceToScreenSpace(playerPosition);
     TextureDrawer& textureDrawer = TextureDrawer::GetInstance();
@@ -207,7 +207,7 @@ void TopDownWorldRenderer::CreatePlayerFeature()
         std::cerr << "MinimapRenderer::CreatePlayerFeature : world is null" << std::endl;
         return;
     }
-    Entity& player = world->GetPlayer();
+    Player& player = world->GetPlayer();
     WFPlayer* wfPlayer = new WFPlayer(&player);
     AddWorldFeature(wfPlayer);
 }

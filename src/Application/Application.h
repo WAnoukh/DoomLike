@@ -19,6 +19,8 @@ class Renderer;
 class UIWidget;
 class Texture;
 
+
+
 using namespace std;
 
 class Application
@@ -55,16 +57,12 @@ public:
 
     InputManager& GetInputManager() { return inputManager; }
 
-    //Texture Editing
-    Texture& GetActiveTexture() { return activeTexture; }
 
     void AddWidget(UIWidget* widget);
 
 private:
     static const unsigned int INITIAL_SCR_WIDTH = 1000;
     static const unsigned int INITIAL_SCR_HEIGHT = 1000;
-    static const unsigned int TEXTURE_W = 1600;
-    static const unsigned int TEXTURE_H = 1024;
     bool LayoutNeedRefresh = true;
     bool mouseRightPressed = false;
     Window Window;
@@ -72,10 +70,14 @@ private:
     double lastX = 0.0f;
     double lastY = 0.0f;
 
+    float lastDeltaTimes[200] = {0.0f};
+    int lastDeltaTimesIndex = 0;
 
     void Render();
 
     void Tick(float deltaTime);
+
+    float GetFps();
 
     //Texture Editing
     Texture activeTexture;

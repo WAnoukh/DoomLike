@@ -2,7 +2,7 @@
 #include "DLObject.h"
 
 class InputManager;
-class Entity;
+class Player;
 
 class PlayerController : public DLObject
 {
@@ -10,9 +10,9 @@ public:
     void Init() override;
     void Tick(float deltaTime) override;
 
-    void SetPlayer(Entity* inPlayer);
+    void SetPlayer(Player* inPlayer);
 
 private:
-    Entity* player = nullptr;
+    Player* player = nullptr;
     InputManager* inputManager = nullptr;
 };
